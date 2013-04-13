@@ -1,0 +1,6 @@
+{% extends 'appomatic_redhogorg_data/models/Node/page.html' %}
+
+{% block content %}
+  {{ obj.description|default:"" }}
+  <a href="{{ obj.content.url }}"><img src="{{ obj.content.url }}"></a>
+{% endblock %}

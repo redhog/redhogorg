@@ -1,0 +1,6 @@
+{% extends 'appomatic_redhogorg_data/models/Node/page.html' %}
+
+{% block content %}
+  {{ obj.description }}
+  <a href="{{ obj.content.url }}">Download</a>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'appomatic_redhogorg_data/models/Node/page.html' %}
+
+{% block content %}
+  {% if obj.summary %}
+    <em>{{ obj.summary|safe }}</em>
+  {% endif %}
+  {{ obj.content|safe }}
+  {{ block.super }}
+{% endblock %}
