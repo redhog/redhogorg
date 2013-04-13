@@ -37,7 +37,7 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
         if os.path.isdir(path):
             for name in os.listdir(path):
                 self.add(os.path.join(path, name))
-        else:
+        elif not path.endswith(".__info__.py"):
             mime = magic.from_file(path, mime=True).split("/")
 
             localpath = path[len(self.importroot):]
@@ -59,11 +59,21 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
             if len(files):
                 file = files[0]
             else:
-                file = File(
-                    source = self.source,
-                    url = localpath,
-                    title = title,
-                    published = datetime.datetime.now())
+                infopath = path + ".__info__.py"
+                info = {
+                    "source": self.source,
+                    "url": localpath,
+                    "title": title,
+                    "published": datetime.datetime.now()}
+
+                if os.path.exists(infopath):
+                    data = {}
+                    execfile(infopath, data)
+                    for key in ('title', 'description'):
+                        if key in data:
+                            info[key] = data[key]
+
+                file = File(**info)
                 file.content.importfile(mediapath)
                 file.save()
 
