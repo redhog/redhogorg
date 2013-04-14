@@ -8,19 +8,25 @@
   -khtml-border-radius: 4px;
 }
 
-.excerpt, a.excerpt {
-  .box;
-  width: 200pt;
-  overflow: hidden;
-  float: left;
-  text-decoration: none;
-  color: black;
-  &:hover {
-    border: 2pt solid #999999;
+.excerpts {
+  .excerpt, a.excerpt {
+    .box;
+    width: 200pt;
+    overflow: hidden;
+    float: left;
+    text-decoration: none;
+    color: black;
+    &:hover {
+      border: 2pt solid #999999;
+    }
   }
 }
 
-.excerpts {
+.excerpts.vertical {
+  .excerpt, a.excerpt {
+    float: none;
+    width: auto;
+  }
 }
 
 .infobox {
@@ -70,4 +76,12 @@
 
 .tags {
   clear: both;
+}
+
+.pagination {
+  padding: 8pt;
+  clear: both;
+  a {
+    text-decoration: none;
+  }
 }

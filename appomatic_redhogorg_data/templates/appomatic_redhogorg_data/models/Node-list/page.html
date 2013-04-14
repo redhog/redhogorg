@@ -1,0 +1,12 @@
+{% extends 'appomatic_redhogorg_data/base.html' %}
+{% load endless %}
+
+{% block content %}
+  {% paginate 10 objs as paginated_objs %}
+  <div class="vertical excerpts">
+    {% for node in paginated_objs %}
+      {{node.render_as.excerpt|safe}}
+    {% endfor %}
+  </div>
+  <div class="pagination">{% show_pages %}</div>
+{% endblock %}

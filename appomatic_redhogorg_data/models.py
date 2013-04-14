@@ -36,7 +36,7 @@ class Renderable(fcdjangoutils.modelhelpers.SubclasModelMixin):
     
     @classmethod
     def list_context(cls, request, style = 'page.html'):
-        return {"objs": cls.objects.filter(parent = None)}
+        return {"objs": cls.objects.all()}
 
     @classmethod
     def render_list(cls, request, style = 'page.html', context_arg = {}):
@@ -64,6 +64,7 @@ class Tag(mptt.models.MPTTModel, Renderable):
 
     class Meta:
         unique_together = (("name", "parent"),)
+        ordering = ('name', )        
 
     class MPTTMeta:
         order_insertion_by = ['name']
@@ -77,6 +78,10 @@ class Tag(mptt.models.MPTTModel, Renderable):
             return nodes[0].get_absolute_url()
         else:
             return django.core.urlresolvers.reverse('appomatic_redhogorg_data.views.tag', kwargs={'name': django.utils.http.urlquote_plus(self.name)})
+
+    @classmethod
+    def list_context(cls, request, style = 'page.html'):
+        return {"objs": cls.objects.filter(parent = None)}
 
     @classmethod
     def menutree(cls):
@@ -136,7 +141,9 @@ class Node(django.db.models.Model, Renderable):
         if not len(res):
             return None
         return res[0]
-        
+
+    class Meta:
+        ordering = ('-published', 'title', )        
 
 class Category(Node):
     @fcdjangoutils.modelhelpers.subclassproxy

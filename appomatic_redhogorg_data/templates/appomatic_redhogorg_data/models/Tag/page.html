@@ -1,32 +1,10 @@
 {% extends 'appomatic_redhogorg_data/base.html' %}
 
 {% block content_title %}
-  <div class="navigation">
-    <div class="item">
-      <div class="title">
-        {% if obj.parent %}
-          <a href="{{obj.parent.get_absolute_url}}">{{obj.parent.name}}</a>
-        {% else %}
-          <a href="{% url 'appomatic_redhogorg_data.views.tag' name='' %}">Root tags</a>
-        {% endif %}
-      </div>
-      <div class="item">
-        <div class="title">{{ obj.name }}</div>
-        <div class="item">
-          {% for child in obj.children.all %}
-            <div class="title"><a href="{{child.get_absolute_url}}">{{child.name}}</a></div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
+  {{obj.render_as.navigation|safe}}
   <h1>{{ obj.name }}</h1>
 {% endblock %}
 
 {% block content %}
-  {% if obj.nodes.all %}
-    {% for node in obj.nodes.all %}
-      {{ node.render_as.excerpt|safe }}
-    {% endfor %}
-  {% endif %}
+  {{obj.render_as.list|safe}}
 {% endblock %}

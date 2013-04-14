@@ -1,4 +1,5 @@
 import appomatic_redhogorg_data.models
 
 def defaults(request):
-    return {"Tag":appomatic_redhogorg_data.models.Tag}
+    return {"Tag":appomatic_redhogorg_data.models.Tag,
+            "Node":appomatic_redhogorg_data.models.Node}

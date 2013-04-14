@@ -3,7 +3,13 @@ import urllib
 import django.http
 
 def node(request, url):
-    return django.http.HttpResponse(appomatic_redhogorg_data.models.Node.objects.get(url=url).render(request))
+    nodes = appomatic_redhogorg_data.models.Node.objects.filter(url=url)
+    if len(nodes):
+        return django.http.HttpResponse(nodes[0].render(request))
+    if url == "" or url == "/":
+        return django.http.HttpResponse(appomatic_redhogorg_data.models.Node.render_list(request))
+    else:
+        raise Exception("Unknown path %s" % url)
 
 def tag(request, name):
     name=urllib.unquote_plus(name).decode('utf8')
