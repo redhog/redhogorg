@@ -1,0 +1,13 @@
+{% extends 'appomatic_redhogorg_data/models/Node/excerpt.html' %}
+
+{% block content_link %}{{ obj.content.url }}{% endblock %}
+
+{% block content_title %}
+  {{block.super}}
+  Format: {{obj.content.typename}}
+{% endblock %}
+
+{% block content %}
+  {{ obj.description|default:"" }}
+  {{ block.super }}
+{% endblock %}
