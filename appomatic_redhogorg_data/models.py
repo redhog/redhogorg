@@ -6,6 +6,7 @@ import django.template
 import datetime
 import django.utils.http
 from django.conf import settings
+import fcdjangoutils.middleware
 
 def get_basetypes(t):
     basetypes = []
@@ -25,14 +26,13 @@ class Renderable(fcdjangoutils.modelhelpers.SubclasModelMixin):
     def render(self, request, style = 'page.html', context_arg = {}):
         context = self.context(request, style)
         context.update(context_arg)
-        return django.http.HttpResponse(
-            django.template.loader.select_template(
-                ["%s/%s" % (t.replace(".", "/"), style)
-                 for t in get_basetypes(type(self))]
-                ).render(
-                    django.template.RequestContext(
-                        request,
-                        context)))
+        return django.template.loader.select_template(
+            ["%s/%s" % (t.replace(".", "/"), style)
+             for t in get_basetypes(type(self))]
+            ).render(
+            django.template.RequestContext(
+                    request,
+                    context))
     
     @classmethod
     def list_context(cls, request, style = 'page.html'):
@@ -42,15 +42,21 @@ class Renderable(fcdjangoutils.modelhelpers.SubclasModelMixin):
     def render_list(cls, request, style = 'page.html', context_arg = {}):
         context = cls.list_context(request, style)
         context.update(context_arg)
-        return django.http.HttpResponse(
-            django.template.loader.select_template(
-                ["%s-list/%s" % (t.replace(".", "/"), style)
-                 for t in get_basetypes(cls)]
-                ).render(
-                    django.template.RequestContext(
-                        request,
-                        context)))
-        
+        return django.template.loader.select_template(
+            ["%s-list/%s" % (t.replace(".", "/"), style)
+             for t in get_basetypes(cls)]
+            ).render(
+            django.template.RequestContext(
+                    request,
+                    context))
+
+    @fcdjangoutils.modelhelpers.subclassproxy
+    def render_as(self):
+        obj = self
+        class Res(object):
+            def __getattribute__(self, style):
+                return obj.render(fcdjangoutils.middleware.get_request(), style + ".html")
+        return Res()
 
 class Tag(mptt.models.MPTTModel, Renderable):
     name = django.db.models.CharField(max_length=50)
@@ -72,7 +78,7 @@ class Tag(mptt.models.MPTTModel, Renderable):
             return django.core.urlresolvers.reverse('appomatic_redhogorg_data.views.tag', kwargs={'name': django.utils.http.urlquote_plus(self.name)})
 
     @classmethod
-    def menutree(cls):        
+    def menutree(cls):
         def menutree(parent = None):
             if parent:
                 children = parent.children.all()
@@ -89,7 +95,9 @@ class Tag(mptt.models.MPTTModel, Renderable):
                                                                   child.name,
                                                                   menutree(child))
                               for child in children))
-        return menutree()
+        if not getattr(cls, "_menutree", None):
+            cls._menutree = menutree()
+        return cls._menutree
 
 class Source(django.db.models.Model):
     tool = django.db.models.CharField(max_length=50)

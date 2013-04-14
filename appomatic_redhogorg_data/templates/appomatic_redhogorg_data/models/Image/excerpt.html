@@ -1,0 +1,9 @@
+{% extends 'appomatic_redhogorg_data/models/Node/excerpt.html' %}
+
+{% block content_link %}{{ obj.content.url }}{% endblock %}
+
+{% block content %}
+  <img src="{{ obj.content.url }}" style="height: auto; width: 80pt">
+  {{ obj.description|default:"" }}
+  {{ block.super }}
+{% endblock %}

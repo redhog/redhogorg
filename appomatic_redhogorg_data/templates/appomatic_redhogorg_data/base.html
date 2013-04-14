@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block meta %}
+  <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}appomatic_redhogorg_data/style.less" />
+{% endblock %}
+
 {% block menu %}
   {{Tag.menutree|safe}}
 {% endblock %}

@@ -1,27 +1,32 @@
 {% extends 'appomatic_redhogorg_data/base.html' %}
 
 {% block content_title %}
+  <div class="navigation">
+    <div class="item">
+      <div class="title">
+        {% if obj.parent %}
+          <a href="{{obj.parent.get_absolute_url}}">{{obj.parent.name}}</a>
+        {% else %}
+          <a href="{% url 'appomatic_redhogorg_data.views.tag' name='' %}">Root tags</a>
+        {% endif %}
+      </div>
+      <div class="item">
+        <div class="title">{{ obj.name }}</div>
+        <div class="item">
+          {% for child in obj.children.all %}
+            <div class="title"><a href="{{child.get_absolute_url}}">{{child.name}}</a></div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
   <h1>{{ obj.name }}</h1>
 {% endblock %}
 
 {% block content %}
-  <h1>Parent</h1>
-  {% if obj.parent %}
-    <a href="{{obj.parent.get_absolute_url}}">{{obj.parent.name}}</a>
-  {% else %}
-    <a href="{% url 'appomatic_redhogorg_data.views.tag' name='' %}">Root tags</a>
-  {% endif %}
-  {% if obj.children.all %}
-    <h1>Children</h1>
-    {% for child in obj.children.all %}
-      <a href="{{child.get_absolute_url}}">{{child.name}}</a>
-    {% endfor %}
-  {% endif %}
-
   {% if obj.nodes.all %}
-    <h1>Nodes</h1>
     {% for node in obj.nodes.all %}
-      <a href="{{node.get_absolute_url}}">{{node.title}}</a>
+      {{ node.render_as.excerpt|safe }}
     {% endfor %}
   {% endif %}
 {% endblock %}

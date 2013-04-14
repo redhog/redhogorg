@@ -1,0 +1,12 @@
+<a href="{% block content_link %}{{obj.get_absolute_url}}{% endblock %}" class="excerpt">
+  {% block content_title %}
+    <h2>{{ obj.title }}</h2>
+    <div class="published">{{obj.published}}</div>
+  {% endblock %}
+  {% block content %}
+    Tags:
+    {% for tag in obj.tags.all %}
+      {{tag.name}}
+    {% endfor %}
+  {% endblock %}
+</a>
