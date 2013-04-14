@@ -33,6 +33,24 @@ class Renderable(fcdjangoutils.modelhelpers.SubclasModelMixin):
                     django.template.RequestContext(
                         request,
                         context)))
+    
+    @classmethod
+    def list_context(cls, request, style = 'page.html'):
+        return {"objs": cls.objects.filter(parent = None)}
+
+    @classmethod
+    def render_list(cls, request, style = 'page.html', context_arg = {}):
+        context = cls.list_context(request, style)
+        context.update(context_arg)
+        return django.http.HttpResponse(
+            django.template.loader.select_template(
+                ["%s-list/%s" % (t.replace(".", "/"), style)
+                 for t in get_basetypes(cls)]
+                ).render(
+                    django.template.RequestContext(
+                        request,
+                        context)))
+        
 
 class Tag(mptt.models.MPTTModel, Renderable):
     name = django.db.models.CharField(max_length=50)
@@ -53,6 +71,25 @@ class Tag(mptt.models.MPTTModel, Renderable):
         else:
             return django.core.urlresolvers.reverse('appomatic_redhogorg_data.views.tag', kwargs={'name': django.utils.http.urlquote_plus(self.name)})
 
+    @classmethod
+    def menutree(cls):        
+        def menutree(parent = None):
+            if parent:
+                children = parent.children.all()
+            else:
+                children = cls.objects.filter(parent=None)
+            if len(children) == 0:
+                return ""
+            else:
+                csscls = ["menu"]
+                if parent is None: csscls.append("menubar")
+                return "<ul class='%s'>%s</ul>" % (
+                    " ".join(csscls),
+                    "\n".join("<li><a href='%s'>%s</a>%s</li>" % (child.get_absolute_url(),
+                                                                  child.name,
+                                                                  menutree(child))
+                              for child in children))
+        return menutree()
 
 class Source(django.db.models.Model):
     tool = django.db.models.CharField(max_length=50)

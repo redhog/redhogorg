@@ -55,24 +55,26 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
             else:
                 File = appomatic_redhogorg_data.models.File
 
+            infopath = path + ".__info__.py"
+            info = {
+                "source": self.source,
+                "url": localpath,
+                "title": title}
+
+            if os.path.exists(infopath):
+                data = {}
+                execfile(infopath, data)
+                for key in ('title', 'description'):
+                    if key in data:
+                        info[key] = data[key]
+
             files = File.objects.filter(url = localpath)
             if len(files):
                 file = files[0]
+                for key, value in info.iteritems():
+                    setattr(file, key, value)
             else:
-                infopath = path + ".__info__.py"
-                info = {
-                    "source": self.source,
-                    "url": localpath,
-                    "title": title,
-                    "published": datetime.datetime.now()}
-
-                if os.path.exists(infopath):
-                    data = {}
-                    execfile(infopath, data)
-                    for key in ('title', 'description'):
-                        if key in data:
-                            info[key] = data[key]
-
+                info["published"] = datetime.datetime.now()
                 file = File(**info)
                 file.content.importfile(mediapath)
                 file.save()
