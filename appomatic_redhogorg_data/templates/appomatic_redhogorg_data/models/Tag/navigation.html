@@ -1,0 +1,21 @@
+{% block navigation %}
+  <div class="navigation">
+    <div class="item">
+      <div class="title">
+        {% if obj.parent %}
+          <a href="{{obj.parent.get_absolute_url}}">{{obj.parent.name}}</a>
+        {% else %}
+          <a href="{% url 'appomatic_redhogorg_data.views.tag' name='' %}">Root tags</a>
+        {% endif %}
+      </div>
+      <div class="item">
+        <div class="title">{{ obj.name }}</div>
+        <div class="item">
+          {% for child in obj.children.all %}
+            <div class="title"><a href="{{child.get_absolute_url}}">{{child.name}}</a></div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

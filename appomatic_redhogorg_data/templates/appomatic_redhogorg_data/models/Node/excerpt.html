@@ -1,12 +1,14 @@
-<a href="{% block content_link %}{{obj.get_absolute_url}}{% endblock %}" class="excerpt">
+<div onclick="window.location='{% block content_link %}{{obj.get_absolute_url}}{% endblock %}';" class="excerpt">
   {% block content_title %}
     <h2>{{ obj.title }}</h2>
     <div class="published">{{obj.published}}</div>
   {% endblock %}
   {% block content %}
-    Tags:
-    {% for tag in obj.tags.all %}
-      {{tag.name}}
-    {% endfor %}
+    <div class="tags">
+      Tags:
+      {% for tag in obj.tags.all %}
+        <a href="{{tag.get_absolute_url}}">{{tag.name}}</a>
+      {% endfor %}
+    </div>
   {% endblock %}
-</a>
+</div>

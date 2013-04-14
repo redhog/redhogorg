@@ -1,0 +1,6 @@
+{% extends 'appomatic_redhogorg_data/models/Article/excerpt.html' %}
+
+{% block content %}
+  {{ block.super }}
+  <a href="http://github.com/{{obj.github_username}}/{{obj.repository_name}}">GitHub repo</a>
+{% endblock %}

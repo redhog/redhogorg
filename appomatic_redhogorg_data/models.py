@@ -72,8 +72,9 @@ class Tag(mptt.models.MPTTModel, Renderable):
         return self.name
 
     def get_absolute_url(self):
-        if self.visible_in_nodes.order_by('url').all():
-            return django.core.urlresolvers.reverse('appomatic_redhogorg_data.views.node', kwargs={'url': self.visible_in_nodes.order_by('url').all()[0].url})
+        nodes = Node.objects.filter(title = self.name)
+        if len(nodes):
+            return nodes[0].get_absolute_url()
         else:
             return django.core.urlresolvers.reverse('appomatic_redhogorg_data.views.tag', kwargs={'name': django.utils.http.urlquote_plus(self.name)})
 
@@ -128,6 +129,14 @@ class Node(django.db.models.Model, Renderable):
 
     def get_absolute_url(self):
         return django.core.urlresolvers.reverse('appomatic_redhogorg_data.views.node', kwargs={'url': self.url})
+
+    @property
+    def tag(self):
+        res = Tag.objects.filter(name = self.title)
+        if not len(res):
+            return None
+        return res[0]
+        
 
 class Category(Node):
     @fcdjangoutils.modelhelpers.subclassproxy

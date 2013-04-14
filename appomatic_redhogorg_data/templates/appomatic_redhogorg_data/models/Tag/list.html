@@ -1,0 +1,7 @@
+{% block list %}
+  <div class="excerpts">
+    {% for node in obj.nodes.all %}
+      {{ node.render_as.excerpt|safe }}
+    {% endfor %}
+  </div>
+{% endblock %}
