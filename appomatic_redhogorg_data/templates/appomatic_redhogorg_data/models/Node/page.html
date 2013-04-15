@@ -4,6 +4,15 @@
   {% if obj.tag %}
     {{ obj.tag.render_as.navigation|safe }}
   {% endif %}
+  <div class="infobox">
+    {% block infobox %}
+      <div>
+        <a class="FlattrButton" href="{{SITE_URL}}{{obj.get_absolute_url}}" data-flattr-uid="redhog" data-flattr-tags="{% for tag in obj.tags.all %}{{tag.name}}{% endfor %}" title="{{obj.title}}" lang="en" data-flattr-category="{% block flatter_category %}text{% endblock %}" data-flattr-button="compact">
+         {% block flatter_description %}{% endblock %}
+        </a>
+      </div>
+    {% endblock %}
+  </div>
 {% endblock %}
 
 {% block content_title %}

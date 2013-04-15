@@ -1,8 +1,8 @@
 {% extends 'appomatic_redhogorg_data/models/Article/page.html' %}
 
-{% block boxes %}
+{% block flatter_category %}software{% endblock %}
+
+{% block infobox %}
   {{ block.super }}
-  <div class="infobox">
-    <a href="http://github.com/{{obj.github_username}}/{{obj.repository_name}}">GitHub repo</a>
-  </div>
+  <div><a href="http://github.com/{{obj.github_username}}/{{obj.repository_name}}">GitHub repo</a></div>
 {% endblock %}
