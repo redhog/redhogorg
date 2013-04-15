@@ -3,6 +3,7 @@ import urllib
 import django.http
 
 def node(request, url):
+    if not url.startswith("/"): url = "/" + url
     nodes = appomatic_redhogorg_data.models.Node.objects.filter(url=url)
     if len(nodes):
         return django.http.HttpResponse(nodes[0].render(request))

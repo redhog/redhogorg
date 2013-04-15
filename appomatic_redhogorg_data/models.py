@@ -134,7 +134,7 @@ class Node(django.db.models.Model, Renderable):
         return self.title
 
     def get_absolute_url(self):
-        return django.core.urlresolvers.reverse('appomatic_redhogorg_data.views.node', kwargs={'url': self.url})
+        return django.core.urlresolvers.reverse('appomatic_redhogorg_data.views.node', kwargs={'url': self.url[1:]})
 
     @property
     def tag(self):
