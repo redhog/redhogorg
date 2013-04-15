@@ -32,6 +32,23 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
     help = 'Imports a directory of files. The files must reside under %s' % settings.MEDIA_ROOT
     args = '<path>'
 
+    def remove(self):
+        for file in appomatic_redhogorg_data.models.File.objects.filter(source = self.source):
+            try:
+                file.content.open()
+                file.content.close()
+            except:
+                print "DELETE", file.title
+                file.delete()
+        for image in appomatic_redhogorg_data.models.Image.objects.filter(source = self.source):
+            try:
+                image.content.open()
+                image.content.close()
+            except:
+                print "DELETE", file.title
+                image.delete()
+
+
     def add(self, path):
         print path
         if os.path.isdir(path):
@@ -96,4 +113,5 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
 
         self.set_source(self.importroot)
         with django.db.transaction.commit_on_success():
+            self.remove()
             self.add(path)

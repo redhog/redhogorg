@@ -22,6 +22,7 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
     def add(self, path):
         for name in os.listdir(path):
             repopath = os.path.join(path, name)
+            if not os.path.exists(os.path.join(repopath, ".git")): continue
             content = ''
             for readme in ("README.md", "readme.md", "README.txt", "readme.txt", "README", "readme"):
                 readme = os.path.join(repopath, readme)
@@ -43,37 +44,42 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
             remote = remote.split("github.com")[1][1:] # Remove everything before github.com/ or github.com:
             remote = remote.split("/")
 
-            username = remote[0]
-
             if remote[1] != name + ".git":
                 print "IGNORING %s (remote name %s not same as local name)" % (name, remote[1])
 
-            date = datetime.datetime.utcfromtimestamp(repo.heads.master.commit.committed_date)
+            info = {
+                "source": self.source,
+                "author": self.user,
+                "license": self.license,
+                "url": "/" + name,
+                "content": content,
+                "title": name,
+                "repository_name": name,
+                "github_username": remote[0],
+                "published": datetime.datetime.utcfromtimestamp(repo.heads.master.commit.committed_date)}
+
+            tags = ["Software"]
+
+            infopath = repopath + ".__info__.py"
+            if os.path.exists(infopath):
+                data = {}
+                execfile(infopath, data)
+                if 'title' in data:
+                    info['title'] = data['title']
+                if 'tags' in data:
+                    tags = data['tags']
 
             projects = appomatic_redhogorg_data.models.Project.objects.filter(title = name)
+
             if len(projects):
                 project = projects[0]
-                project.source = self.source
-                project.author = self.user
-                project.license = self.license
-                project.url = "/" + name
-                project.content = content
-                project.repository_name = name
-                project.github_username = username
-                project.published = date
+                for key, value in info.iteritems():
+                    setattr(project, key, value)
             else:
-                project = appomatic_redhogorg_data.models.Project(
-                    source = self.source,
-                    author = self.user,
-                    license = self.license,
-                    url = "/" + name,
-                    content = content,
-                    title = name,
-                    repository_name = name,
-                    github_username = username,
-                    published = date)
+                project = appomatic_redhogorg_data.models.Project(**info)
             project.save()
-            project.tags.add(self.add_tag("Software"))
+            for tag in tags:
+                project.tags.add(self.add_tag(tag))
 
     def handle2(self, path, *args, **options):
         self.importroot = path
