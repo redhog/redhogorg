@@ -2,7 +2,7 @@
   <div class="excerpt_title">
     {% block content_title %}
       <h2>{{ obj.title }}</h2>
-      <div class="published">{{obj.published}}</div>
+      {% if obj.published %}<div class="published">{{obj.published}}</div>{% endif %}
     {% endblock %}
   </div>
   <div class="excerpt_content">

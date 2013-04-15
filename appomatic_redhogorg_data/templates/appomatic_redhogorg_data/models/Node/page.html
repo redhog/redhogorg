@@ -13,23 +13,23 @@
       </div>
     {% endblock %}
   </div>
+  <div class="infobox">
+    <h2>Tags</h2>
+    {% for tag in obj.tags.all %}
+      <a href="{{tag.get_absolute_url}}">{{tag.name}}</a>
+    {% endfor %}
+  </div>
 {% endblock %}
 
 {% block content_title %}
   <h1>{{ obj.title }}</h1>
-  <div class="published">{{obj.published}}</div>
+  {% if obj.published %}<div class="published">{{obj.published}}</div>{% endif %}
 {% endblock %}
 
 {% block content %}
   {% if obj.tag %}
     {{ obj.tag.render_as.list|safe }}
   {% endif %}
-  <div class="tags">
-    <h2>Tags</h2>
-    {% for tag in obj.tags.all %}
-      <a href="{{tag.get_absolute_url}}">{{tag.name}}</a>
-    {% endfor %}
-  </div>
 {% endblock %}
 
 {% block footer %}

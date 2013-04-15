@@ -1,7 +1,10 @@
 {% extends 'appomatic_redhogorg_data/base.html' %}
 
-{% block content_title %}
+{% block boxes %}
   {{obj.render_as.navigation|safe}}
+{% endblock %}
+
+{% block content_title %}
   <h1>{{ obj.name }}</h1>
 {% endblock %}
 
