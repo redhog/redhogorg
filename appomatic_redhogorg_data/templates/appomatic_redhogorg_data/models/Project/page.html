@@ -4,5 +4,12 @@
 
 {% block infobox %}
   {{ block.super }}
-  <div><a href="http://github.com/{{obj.github_username}}/{{obj.repository_name}}">GitHub repo</a></div>
+  {% if obj.repository_name %}
+    <div><a href="http://localhost/viewgit/?a=summary&p={{obj.repository_name}}">Local repo</a></div>
+    <div><a href="http://github.com/{{obj.github_username}}/{{obj.repository_name}}">GitHub repo</a></div>
+
+
+    <div><iframe src="http://ghbtns.com/github-btn.html?user={{obj.github_username}}&repo={{obj.repository_name}}&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe></div>
+    <div><iframe src="http://ghbtns.com/github-btn.html?user={{obj.github_username}}&repo={{obj.repository_name}}&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe></div>
+  {% endif %}
 {% endblock %}
