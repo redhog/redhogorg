@@ -3,7 +3,9 @@
 {% block content_link %}{{ obj.content.url }}{% endblock %}
 
 {% block content %}
-  <img src="{{ obj.content.url }}" style="height: auto; width: 80pt">
-  {{ obj.description|default:"" }}
+  <div class="excerpt_content_body">
+    <img src="{{ obj.content.url }}" style="height: auto; width: 80pt">
+    {{ obj.description|default:"" }}
+  </div>
   {{ block.super }}
 {% endblock %}

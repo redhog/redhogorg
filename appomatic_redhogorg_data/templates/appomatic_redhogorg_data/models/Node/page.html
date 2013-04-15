@@ -1,5 +1,7 @@
 {% extends 'appomatic_redhogorg_data/base.html' %}
 
+{% block body_class %}{{obj.types}}{% endblock %}
+
 {% block boxes %}
   {% if obj.tag %}
     {{ obj.tag.render_as.navigation|safe }}

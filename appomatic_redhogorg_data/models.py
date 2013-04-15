@@ -18,7 +18,13 @@ def get_basetypes(t):
     get_basetypes(t)
     return basetypes
 
+TypeType = type
+
 class Renderable(fcdjangoutils.modelhelpers.SubclasModelMixin):
+    @property
+    def types(self):
+        return ' '.join(t.replace(".", "-") for t in get_basetypes(TypeType(self)))
+
     @fcdjangoutils.modelhelpers.subclassproxy
     def context(self, request, style = 'page.html'):
         return {'obj': self.subclassobject}
