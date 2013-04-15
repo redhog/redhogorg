@@ -7,6 +7,7 @@ import datetime
 import django.utils.http
 from django.conf import settings
 import fcdjangoutils.middleware
+import django.contrib.auth.models
 
 def get_basetypes(t):
     basetypes = []
@@ -122,11 +123,11 @@ class License(django.db.models.Model):
 class Node(django.db.models.Model, Renderable):
     url = django.db.models.CharField(max_length=1024, unique=True)
     tags = django.db.models.ManyToManyField(Tag, null=True, blank=True, related_name='nodes')
-    include_tags = django.db.models.ManyToManyField(Tag, null=True, blank=True, related_name='visible_in_nodes')
     title = django.db.models.CharField(max_length=50)
-    published = django.db.models.DateTimeField(default=datetime.datetime.now)
+    published = django.db.models.DateTimeField(default=datetime.datetime.now, null=True, blank=True)
     source = django.db.models.ForeignKey(Source, null=True, blank=True)
     license = django.db.models.ForeignKey(License, null=True, blank=True)
+    author = django.db.models.ForeignKey(django.contrib.auth.models.User, null=True, blank=True)
 
     @fcdjangoutils.modelhelpers.subclassproxy
     def __unicode__(self):

@@ -22,3 +22,21 @@
     {% endfor %}
   </div>
 {% endblock %}
+
+{% block footer %}
+  {% if obj.author or obj.license %}
+    <div class="copyright">
+      {% if obj.author %}
+        <div class="authors">
+          Copyright {{obj.published}} by {{obj.author.username}} ({{obj.author.get_full_name}}) &lt;<a href="mailto:{{obj.author.email}}">{{obj.author.email}}</a>&gt; 
+         .
+        </div>
+      {% endif %}
+      {% if obj.license %}
+        <div class="license">
+          This page is subject to <a href="{{obj.license.url}}">{{obj.license.name}}</a>.
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock %}

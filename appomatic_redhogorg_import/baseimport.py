@@ -7,6 +7,7 @@ import datetime
 import os.path
 import datetime
 from django.conf import settings
+import django.contrib.auth.models
 
 class ImportCommand(django.core.management.base.BaseCommand):
     TOOLNAME = 'import'
@@ -32,8 +33,26 @@ class ImportCommand(django.core.management.base.BaseCommand):
                 argument = argument)
             self.source.save()
 
+    def set_license(self, name = "GPL", url = "http://www.gnu.org/copyleft/gpl.html"):
+        licenses = appomatic_redhogorg_data.models.License.objects.filter(name = name)
+        if len(licenses):
+            self.license = licenses[0]
+        else:
+            self.license = appomatic_redhogorg_data.models.License(name = name, url = url)
+            self.license.save()
+
+    def set_user(self):
+        users = django.contrib.auth.models.User.objects.filter(username = "redhog")
+        if len(users):
+            self.user = users[0]
+        else:
+            self.user = django.contrib.auth.models.User(username = "redhog")
+            self.user.save()
+
     def handle(self, *args, **options):
         try:
+            self.set_user()
+            self.set_license()
             return self.handle2(*args, **options)
         except Exception, e:
             print type(e), e

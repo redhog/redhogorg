@@ -33,6 +33,8 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
             try:
                 article = appomatic_redhogorg_data.models.Article(
                     source = self.source,
+                    author = self.user,
+                    license = self.license,
                     url = url,
                     title = entry.title,
                     content = entry.description,

@@ -28,33 +28,26 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
             try:
                 published = datetime.datetime(int((data.get('copyright_years', '') or '').split("-")[-1]), 1, 1)
             except:
-                published = datetime.datetime(1970, 1, 1)
+                published = None
 
-            license_url = data.get('license_url', '')
-            if '://' not in license_url: license_url = None
-
-            license = None
-            if license_url:
-                licenses = appomatic_redhogorg_data.models.License.objects.filter(url = license_url)
-                if licenses:
-                    license = licenses[0]
-                else:
-                    license = appomatic_redhogorg_data.models.License(url = license_url, name = data['license'])
-                    license.save()
+            if 'license' in data and 'license_url' in data and '://' in data['license_url']:
+                self.set_license(data['license'], data['license_url'])
             
             projects = appomatic_redhogorg_data.models.Project.objects.filter(title = data['name'])
             if projects:
                 project = projects[0]
-                project.content = data['short_description'],
-                project.license = license,
+                project.content = data['short_description']
+                project.license = self.license
+                project.author = self.user
                 project.published = published
             else:
                 project = appomatic_redhogorg_data.models.Project(
                     source = self.source,
+                    author = self.user,
+                    license = self.license,
                     url = "/Projects/" + data['name'],
                     content = data['short_description'],
                     title = data['name'],
-                    license = license,
                     published = published)
             project.save()
             project.tags.add(self.add_tag("Software"))

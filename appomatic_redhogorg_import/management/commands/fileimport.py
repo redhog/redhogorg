@@ -38,7 +38,7 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
             for name in os.listdir(path):
                 self.add(os.path.join(path, name))
         elif not path.endswith(".__info__.py"):
-            mime = magic.from_file(path, mime=True).split("/")
+            mime = magic.from_file(path, mime=True)
 
             localpath = path[len(self.importroot):]
             
@@ -50,7 +50,12 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
             filename = os.path.basename(path)
             title = os.path.splitext(filename)[0]
 
-            if mime[0] == 'image':
+            if (mime.startswith('image/png') or
+                mime.startswith('image/gif') or
+                mime.startswith('image/jpeg') or
+                mime.startswith('image/bmp') or
+                mime.startswith('image/x-windows-bmp') or
+                mime.startswith('image/svg')):
                 File = appomatic_redhogorg_data.models.Image
             else:
                 File = appomatic_redhogorg_data.models.File
@@ -58,6 +63,8 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
             infopath = path + ".__info__.py"
             info = {
                 "source": self.source,
+                "author": self.user,
+                "license": self.license,
                 "url": localpath,
                 "title": title}
 
@@ -74,7 +81,7 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
                 for key, value in info.iteritems():
                     setattr(file, key, value)
             else:
-                info["published"] = datetime.datetime.now()
+                info["published"] = None
                 file = File(**info)
                 file.content.importfile(mediapath)
                 file.save()

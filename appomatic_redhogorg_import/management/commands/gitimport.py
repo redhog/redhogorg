@@ -37,7 +37,7 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
 
             remote = repo.remotes.origin.url
 
-            if 'github.com/' not in remote:
+            if 'github.com' not in remote:
                 print "IGNORING %s (%s not a github repo)" % (name, remote)
 
             remote = remote.split("github.com")[1][1:] # Remove everything before github.com/ or github.com:
@@ -48,14 +48,30 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
             if remote[1] != name + ".git":
                 print "IGNORING %s (remote name %s not same as local name)" % (name, remote[1])
 
-            project = appomatic_redhogorg_data.models.Project(
-                source = self.source,
-                url = "/" + name,
-                content = content,
-                title = name,
-                repository_name = name,
-                github_username = username,
-                published = datetime.datetime.now())
+            date = datetime.datetime.utcfromtimestamp(repo.heads.master.commit.committed_date)
+
+            projects = appomatic_redhogorg_data.models.Project.objects.filter(title = name)
+            if len(projects):
+                project = projects[0]
+                project.source = self.source
+                project.author = self.user
+                project.license = self.license
+                project.url = "/" + name
+                project.content = content
+                project.repository_name = name
+                project.github_username = username
+                project.published = date
+            else:
+                project = appomatic_redhogorg_data.models.Project(
+                    source = self.source,
+                    author = self.user,
+                    license = self.license,
+                    url = "/" + name,
+                    content = content,
+                    title = name,
+                    repository_name = name,
+                    github_username = username,
+                    published = date)
             project.save()
             project.tags.add(self.add_tag("Software"))
 
