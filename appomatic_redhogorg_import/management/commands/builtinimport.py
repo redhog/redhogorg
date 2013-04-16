@@ -36,8 +36,8 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
                 render_subtype = subtype
                 ).save()
 
-        for (url, title, items) in (("/sidebar/left", "Left sidebar", ("/mainmenu",)),
-                                    ("/sidebar/right", "Left sidebar", ("/badge/facebook", "/badge/github", "/badge/twitter"))):
+        for (url, title, items) in (("/sidebar/left", "Left sidebar", ("/mainmenu", "/badge/facebook")),
+                                    ("/sidebar/right", "Left sidebar", ("/badge/github", "/badge/twitter"))):
 
             collection = appomatic_redhogorg_data.models.ListCollection(
                 source = self.source,
