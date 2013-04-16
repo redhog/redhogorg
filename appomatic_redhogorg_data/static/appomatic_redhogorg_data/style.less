@@ -27,6 +27,11 @@
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 8pt;
+  overflow: hidden;
+  height: 1.5em;
+  &:hover {
+    overflow: visible;
+  }
 }
 
 .box {
@@ -46,6 +51,9 @@
     .box;
     width: 200pt;
     overflow: hidden;
+    &:hover {
+      overflow: visible;
+    }
     float: left;
     text-decoration: none;
     color: black;
@@ -58,21 +66,32 @@
       }
     }
     .excerpt_content {
-      .excerpt_content_body {
-        img {
-          height: 200pt;
-          width: auto;
-        }
+      img {
         height: 200pt;
-        overflow: hidden;
+        width: auto;
       }
-      .tags {
-      }
+      height: 200pt;
+      overflow: hidden;
       h1 { font-size: 1.3em; }
       h2 { font-size: 1.3em; }
       h3 { font-size: 1.2em; }
       h4 { font-size: 1.2em; }
       h5 { font-size: 1.1em; }
+    }
+    .excerpt_footer {
+      height: 2.5em;
+    }
+    &.noborder {
+      border: 2px solid white;
+      padding: 0;
+    }
+  }
+}
+
+.right, .left {
+  .excerpts {
+    .excerpt, a.excerpt {
+      width: auto;
     }
   }
 }
@@ -81,9 +100,7 @@
   .excerpts {
     .excerpt, a.excerpt {
       .excerpt_content {
-        .excerpt_content_body {
-          height: 50pt;
-        }
+        height: 50pt;
       }
     }
   }
@@ -94,9 +111,7 @@
     float: none;
     width: auto;
     .excerpt_content {
-      .excerpt_content_body {
-        height: auto;
-      }
+       height: auto;
     }
   }
 }
@@ -149,4 +164,8 @@
   a {
     color: #880000;
   }
+}
+
+.twitter-timeline {
+  width: auto;
 }

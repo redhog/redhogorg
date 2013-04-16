@@ -2,6 +2,12 @@
 
 {% block body_class %}{{obj.types}}{% endblock %}
 
+{% block meta %}
+  <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "ur-7a59dfef-4f25-8c03-42ae-73266f3a2cef", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+  {{block.super}}
+{% endblock %}
+
 {% block boxes %}
   {% if request.user.is_staff %}
     <div class="infobox">
@@ -15,6 +21,13 @@
          {% block flatter_description %}{% endblock %}
         </a>
       </div>
+      <div>
+        <span class='st_facebook_hcount' displayText='Facebook'></span>
+      </div>
+      <div>
+        <span class='st_twitter_hcount' displayText='Tweet'></span>
+      </div>
+      <hr />
     {% endblock %}
   </div>
   {% if obj.tag %}

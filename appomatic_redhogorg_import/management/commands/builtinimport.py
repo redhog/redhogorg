@@ -20,13 +20,14 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
     args = '<path>'
 
     def add(self):
-        for (url, subtype, title) in (("/mainmenu", "MainMenu", "Main menu"),
-                                      ("/badge/facebook", "Badge/FaceBook", "FaceBook badge"),
-                                      ("/badge/github", "Badge/GitHub", "GitHub badge"),
-                                      ("/badge/twitter", "Badge/Twitter", "Twitter badge"),
+        for (url, subtype, title, tags) in (("/mainmenu", "MainMenu", "Main menu", ()),
+                                      ("/badge/facebook", "Badge/FaceBook", "FaceBook badge", ()),
+                                      ("/badge/github", "Badge/GitHub", "GitHub badge", ("Personal",)),
+                                      ("/badge/twitter", "Badge/Twitter", "Twitter badge", ()),
+                                      ("/badge/linkedin", "Badge/LinkedIn", "LinkedIn badge", ("Personal",)),
                                       ):
 
-            project = appomatic_redhogorg_data.models.StaticTemplate(
+            template = appomatic_redhogorg_data.models.StaticTemplate(
                 source = self.source,
                 author = self.user,
                 license = self.license,
@@ -34,10 +35,13 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
                 title = title,
                 published = None,
                 render_subtype = subtype
-                ).save()
+                )
+            template.save()
+            for tag in tags:
+                template.tags.add(self.add_tag(tag))
 
         for (url, title, items) in (("/sidebar/left", "Left sidebar", ("/mainmenu", "/badge/facebook")),
-                                    ("/sidebar/right", "Left sidebar", ("/badge/github", "/badge/twitter"))):
+                                    ("/sidebar/right", "Right sidebar", ("/badge/github", "/badge/twitter"))):
 
             collection = appomatic_redhogorg_data.models.ListCollection(
                 source = self.source,

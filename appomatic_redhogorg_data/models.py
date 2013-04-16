@@ -113,12 +113,16 @@ class Tag(mptt.models.MPTTModel, Renderable):
             else:
                 csscls = ["menu"]
                 if parent is None: csscls.append("menubar")
+                items = ""
+                if parent is None:
+                    items = "<li><a href='/'>Home</a></li>"
+                items += "\n".join("<li><a href='%s'>%s</a>%s</li>" % (child.get_absolute_url(),
+                                                                       child.name,
+                                                                       menutree(child))
+                                   for child in children)
                 return "<ul class='%s'>%s</ul>" % (
                     " ".join(csscls),
-                    "\n".join("<li><a href='%s'>%s</a>%s</li>" % (child.get_absolute_url(),
-                                                                  child.name,
-                                                                  menutree(child))
-                              for child in children))
+                    items)
         if not getattr(cls, "_menutree", None):
             cls._menutree = menutree()
         return cls._menutree
@@ -217,5 +221,6 @@ class StaticTemplate(Node):
             ('MainMenu', 'Main menu'),
             ('Badge/FaceBook', 'FaceBook badge'),
             ('Badge/GitHub', 'GitHub badge'),
-            ('Badge/Twitter', 'Twitter badge')
+            ('Badge/Twitter', 'Twitter badge'),
+            ('Badge/LinkedIn', 'LinkedIn badge')
             ))

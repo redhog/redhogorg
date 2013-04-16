@@ -7,6 +7,10 @@
   </div>
   <div class="excerpt_content">
     {% block content %}
+    {% endblock %}
+  </div>
+  <div class="excerpt_footer">
+    {% block footer %}
       <div class="tags">
         Tags:
         {% for tag in obj.tags.all %}
