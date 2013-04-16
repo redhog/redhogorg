@@ -4,7 +4,7 @@
 
 {% block content %}
   <div class="excerpt_content_body">
-    <img src="{{ obj.content.url }}" style="height: auto; width: 80pt">
+    <img src="{{ obj.content.url }}">
     {{ obj.description|default:"" }}
   </div>
   {{ block.super }}

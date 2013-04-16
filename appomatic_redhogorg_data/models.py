@@ -8,6 +8,7 @@ import django.utils.http
 from django.conf import settings
 import fcdjangoutils.middleware
 import django.contrib.auth.models
+import django.core.urlresolvers
 
 def get_basetypes(t):
     basetypes = []
@@ -64,6 +65,13 @@ class Renderable(fcdjangoutils.modelhelpers.SubclasModelMixin):
             def __getattribute__(self, style):
                 return obj.render(fcdjangoutils.middleware.get_request(), style + ".html")
         return Res()
+
+    def get_admin_url(self):
+        return django.core.urlresolvers.reverse(
+            'admin:%s_%s_change' % (self._meta.app_label,
+                                    self._meta.module_name),
+            args=[self.id])
+
 
 class Tag(mptt.models.MPTTModel, Renderable):
     name = django.db.models.CharField(max_length=50)

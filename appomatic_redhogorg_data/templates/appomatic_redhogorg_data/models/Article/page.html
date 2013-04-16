@@ -2,9 +2,9 @@
 
 {% block flatter_description %}
   {% if obj.summary %}
-    <em>{{ obj.summary|safe }}</em>
+    <em>{{ obj.summary|striptags }}</em>
   {% else %}
-    {{ obj.content|truncatewords_html:50|safe }}
+    {{ obj.content|truncatewords_html:50|striptags }}
   {% endif %}
 {% endblock %}
 

@@ -21,6 +21,11 @@
       <a href="{{tag.get_absolute_url}}">{{tag.name}}</a>
     {% endfor %}
   </div>
+  {% if request.user.is_staff %}
+    <div class="infobox">
+      <a href="{{obj.get_admin_url}}">Edit</a>
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block content_title %}
