@@ -3,8 +3,10 @@
 {% block body_class %}{{obj.types}}{% endblock %}
 
 {% block boxes %}
-  {% if obj.tag %}
-    {{ obj.tag.render_as.navigation|safe }}
+  {% if request.user.is_staff %}
+    <div class="infobox">
+      <a href="{{obj.get_admin_url}}">Edit</a>
+    </div>
   {% endif %}
   <div class="infobox">
     {% block infobox %}
@@ -15,17 +17,16 @@
       </div>
     {% endblock %}
   </div>
+  {% if obj.tag %}
+    {{ obj.tag.render_as.navigation|safe }}
+  {% endif %}
   <div class="infobox">
     <h2>Tags</h2>
     {% for tag in obj.tags.all %}
       <a href="{{tag.get_absolute_url}}">{{tag.name}}</a>
     {% endfor %}
   </div>
-  {% if request.user.is_staff %}
-    <div class="infobox">
-      <a href="{{obj.get_admin_url}}">Edit</a>
-    </div>
-  {% endif %}
+  {{block.super}}
 {% endblock %}
 
 {% block content_title %}

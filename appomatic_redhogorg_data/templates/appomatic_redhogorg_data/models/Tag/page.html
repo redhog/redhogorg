@@ -2,6 +2,7 @@
 
 {% block boxes %}
   {{obj.render_as.navigation|safe}}
+  {{block.super}}
 {% endblock %}
 
 {% block content_title %}

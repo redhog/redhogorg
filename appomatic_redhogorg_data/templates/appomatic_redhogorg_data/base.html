@@ -5,5 +5,9 @@
 {% endblock %}
 
 {% block menu %}
-  {{Tag.menutree|safe}}
+  {{Node.get.sidebar__left.render_as.list}}
+{% endblock %}
+
+{% block boxes %}
+  {{Node.get.sidebar__right.render_as.list}}
 {% endblock %}

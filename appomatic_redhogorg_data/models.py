@@ -32,10 +32,13 @@ class Renderable(fcdjangoutils.modelhelpers.SubclasModelMixin):
 
     @fcdjangoutils.modelhelpers.subclassproxy
     def render(self, request, style = 'page.html', context_arg = {}):
+        subtype = ''
+        if hasattr(self, 'render_subtype'):
+            subtype = "/" + self.render_subtype
         context = self.context(request, style)
         context.update(context_arg)
         return django.template.loader.select_template(
-            ["%s/%s" % (t.replace(".", "/"), style)
+            ["%s%s/%s" % (t.replace(".", "/"), subtype, style)
              for t in get_basetypes(type(self))]
             ).render(
             django.template.RequestContext(
@@ -158,27 +161,42 @@ class Node(django.db.models.Model, Renderable):
         return res[0]
 
     class Meta:
-        ordering = ('-published', 'title', )        
+        ordering = ('-published', 'title', )
 
-class Category(Node):
+    @classmethod
+    def get(cls):
+        Obj = cls
+        class Res(object):
+            def __getattribute__(self, url):
+                return Obj.objects.get(url = "/" + url.replace("__", "/"))
+        return Res()
+
+
+class Collection(Node):
     @fcdjangoutils.modelhelpers.subclassproxy
-    def context(self, request, style = 'page.html'):
-        context = Node.context(self, request, style)
-        nodes = {}
-        for tag in self.tags.all():
-            nodes.update(dict(
-                    (node.url, node.subclassobject)
-                    for node in tag.nodes.all()
-                    if node.id != self.id))
-        context['nodes'] = nodes
-        return context
+    def items(self):
+        return []
+
+class ListCollection(Collection):
+    nodes = django.db.models.ManyToManyField(Node, null=True, blank=True, through='ListCollectionMember', related_name='in_list_collection')
+    
+    def items(self):
+        relations = ListCollectionMember.objects.filter(collection = self)
+
+        return Node.objects.filter(
+            member_in_list_collection__in = relations
+            ).annotate(
+            ordering = django.db.models.Min('member_in_list_collection__ordering')
+            ).order_by('ordering').distinct()
+
+class ListCollectionMember(django.db.models.Model):
+    collection = django.db.models.ForeignKey(ListCollection, related_name="members")
+    node = django.db.models.ForeignKey(Node, related_name='member_in_list_collection')
+    ordering = django.db.models.FloatField(default = 0)    
 
 class Article(Node):
     summary = ckeditor.fields.RichTextField(blank=True, null=True)
     content = ckeditor.fields.RichTextField()
-
-    def __unicode__(self):
-        return self.title
 
 class File(Node):
     content = django.db.models.FileField(upload_to='.')
@@ -191,3 +209,13 @@ class Image(Node):
 class Project(Article):
     github_username = django.db.models.CharField(max_length=50)
     repository_name = django.db.models.CharField(max_length=50)
+
+class StaticTemplate(Node):
+    render_subtype = django.db.models.CharField(
+        max_length=50,
+        choices=(
+            ('MainMenu', 'Main menu'),
+            ('Badge/FaceBook', 'FaceBook badge'),
+            ('Badge/GitHub', 'GitHub badge'),
+            ('Badge/Twitter', 'Twitter badge')
+            ))
