@@ -1,11 +1,12 @@
 {% extends 'appomatic_redhogorg_data/base.html' %}
 
-{% block boxes %}
-  {{obj.render_as.navigation|safe}}
-  {{block.super}}
-{% endblock %}
-
 {% block content_title %}
+  <div class="breadcrumb">
+    <a href="/">Home</a>
+    {% for item in obj.breadcrumb %}
+      &gt;&gt; <a href="{{item.get_absolute_url}}">{{item.name}}</a>
+    {% endfor %}
+  </div>
   <h1>{{ obj.name }}</h1>
 {% endblock %}
 

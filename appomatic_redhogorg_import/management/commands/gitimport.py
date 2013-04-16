@@ -60,23 +60,33 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
 
             tags = ["Software"]
 
+            projecttype = 'project'
             infopath = repopath + ".__info__.py"
             if os.path.exists(infopath):
                 data = {}
                 execfile(infopath, data)
                 if 'title' in data:
                     info['title'] = data['title']
+                if 'openfontlibrary_fontname' in data:
+                    info['openfontlibrary_fontname'] = data['openfontlibrary_fontname']
                 if 'tags' in data:
                     tags = data['tags']
+                if 'projecttype' in data:
+                    projecttype = data['projecttype']
+            
+            if projecttype == 'project':
+                Project = appomatic_redhogorg_data.models.Project
+            elif projecttype == 'font':
+                Project = appomatic_redhogorg_data.models.Font
 
-            projects = appomatic_redhogorg_data.models.Project.objects.filter(title = name)
+            projects = Project.objects.filter(url = info['url'])
 
             if len(projects):
                 project = projects[0]
                 for key, value in info.iteritems():
                     setattr(project, key, value)
             else:
-                project = appomatic_redhogorg_data.models.Project(**info)
+                project = Project(**info)
             project.save()
             for tag in tags:
                 project.tags.add(self.add_tag(tag))

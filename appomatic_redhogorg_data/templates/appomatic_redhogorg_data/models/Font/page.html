@@ -1,0 +1,10 @@
+{% extends 'appomatic_redhogorg_data/models/Project/page.html' %}
+
+{% block flatter_category %}images{% endblock %}
+
+{% block infobox %}
+  {{ block.super }}
+  {% if obj.openfontlibrary_fontname %}
+    <div><a href="http://openfontlibrary.org/en/font/{{obj.openfontlibrary_fontname}}">OpenFontLibrary page</a></div>
+  {% endif %}
+{% endblock %}

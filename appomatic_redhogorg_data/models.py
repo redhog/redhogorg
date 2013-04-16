@@ -97,6 +97,9 @@ class Tag(mptt.models.MPTTModel, Renderable):
         else:
             return django.core.urlresolvers.reverse('appomatic_redhogorg_data.views.tag', kwargs={'name': django.utils.http.urlquote_plus(self.name)})
 
+    def breadcrumb(self, include_self=False):
+        return self.get_ancestors(include_self=include_self)
+
     @classmethod
     def list_context(cls, request, style = 'page.html'):
         return {"objs": cls.objects.filter(parent = None)}
@@ -164,6 +167,14 @@ class Node(django.db.models.Model, Renderable):
             return None
         return res[0]
 
+    def breadcrumb(self):
+        if self.tag:
+            return self.tag.breadcrumb()
+        tags = self.tags.all()
+        if len(tags):
+            return tags[0].breadcrumb(include_self=True)
+        return []
+
     class Meta:
         ordering = ('-published', 'title', )
 
@@ -213,6 +224,9 @@ class Image(Node):
 class Project(Article):
     github_username = django.db.models.CharField(max_length=50)
     repository_name = django.db.models.CharField(max_length=50)
+
+class Font(Project):
+    openfontlibrary_fontname = django.db.models.CharField(max_length=50)
 
 class StaticTemplate(Node):
     render_subtype = django.db.models.CharField(

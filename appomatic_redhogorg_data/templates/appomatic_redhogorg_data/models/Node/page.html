@@ -30,9 +30,6 @@
       <hr />
     {% endblock %}
   </div>
-  {% if obj.tag %}
-    {{ obj.tag.render_as.navigation|safe }}
-  {% endif %}
   <div class="infobox">
     <h2>Tags</h2>
     {% for tag in obj.tags.all %}
@@ -43,6 +40,12 @@
 {% endblock %}
 
 {% block content_title %}
+  <div class="breadcrumb">
+    <a href="/">Home</a>
+    {% for item in obj.breadcrumb %}
+      &gt;&gt; <a href="{{item.get_absolute_url}}">{{item.name}}</a>
+    {% endfor %}
+  </div>
   <h1>{{ obj.title }}</h1>
   {% if obj.published %}<div class="published">{{obj.published}}</div>{% endif %}
 {% endblock %}
