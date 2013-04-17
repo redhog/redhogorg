@@ -1,6 +1,8 @@
 {% extends 'appomatic_redhogorg_data/models/Article/excerpt.html' %}
 
-{% block footer %}
+{% block buttons %}
   {{ block.super }}
-  <a href="http://github.com/{{obj.github_username}}/{{obj.repository_name}}">GitHub repo</a>
+  {% if obj.repository_name %}
+    <a href="http://github.com/{{obj.github_username}}/{{obj.repository_name}}"><i class="icon-github"></i> GitHub</a>
+  {% endif %}
 {% endblock %}

@@ -1,0 +1,8 @@
+{% extends 'appomatic_redhogorg_data/models/Project/excerpt.html' %}
+
+{% block buttons %}
+  {{ block.super }}
+  {% if obj.openfontlibrary_fontname %}
+    <a href="http://openfontlibrary.org/en/font/{{obj.openfontlibrary_fontname}}">Font</a>
+  {% endif %}
+{% endblock %}

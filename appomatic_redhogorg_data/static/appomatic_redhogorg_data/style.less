@@ -1,3 +1,30 @@
+@color-link: #880000;
+@color-border: #880000;
+@color-border-active: #000000;
+
+@color-menu: #000000;
+@color-menu-active: #880000;
+
+
+@color-gradient-top: #ffffff;
+@color-gradient-bottom: #885555;
+
+@font-face {
+    font-family: 'Octicons Regular';
+    src: url("https://a248.e.akamai.net/assets.github.com/fonts/octicons/octicons-regular-webfont.eot?bcbcd035");
+    src: url("https://a248.e.akamai.net/assets.github.com/fonts/octicons/octicons-regular-webfont.eot?bcbcd035#iefix") format("embedded-opentype"), url("https://a248.e.akamai.net/assets.github.com/fonts/octicons/octicons-regular-webfont.woff?fcb80cfe") format("woff"), url("https://a248.e.akamai.net/assets.github.com/fonts/octicons/octicons-regular-webfont.ttf?c6d8539d") format("truetype"), url("https://a248.e.akamai.net/assets.github.com/fonts/octicons/octicons-regular-webfont.svg?2fc2af83#newFontRegular") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+hr {
+  border: 1px solid #880000;
+}
+
+a {
+  color: @color-link;
+}
+
 .left {
   position: absolute;
   left: 0;
@@ -37,13 +64,22 @@
   display: block;
   padding: 8pt;
   margin: 8pt;
-  border: 2pt solid #dddddd;
+  border: 2pt solid @color-border;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   -khtml-border-radius: 4px;
 }
 
 .published { .subheading; }
+
+.content {
+  h1 { font-size: 1.5em; }
+  h2 { font-size: 1.4em; }
+  h3 { font-size: 1.3em; }
+  h4 { font-size: 1.2em; }
+  h5 { font-size: 1.1em; }
+}
+
 
 .excerpts {
   .excerpt, a.excerpt {
@@ -57,7 +93,7 @@
     text-decoration: none;
     color: black;
     &:hover {
-      border: 2pt solid #999999;
+      border: 2pt solid @color-border-active;
     }
     .excerpt_title {
       h2 {
@@ -78,7 +114,44 @@
       h5 { font-size: 1.1em; }
     }
     .excerpt_footer {
-      height: 2.5em;
+      .excerpt_buttons {
+        float: right;
+        -webkit-border-bottom-right-radius: 4px;
+        -moz-border-radius-bottomright: 4px;
+        border-bottom-right-radius: 4px;
+        margin-right: -8pt;
+        margin-bottom: -8pt;
+        a {
+          padding: 4pt;
+          display: block;
+          float: right;
+          text-decoration: none;
+          border-top: 1px solid @color-border;
+          border-left: 1px solid @color-border;
+
+          color: #ffffff;
+          background: #880000; /* Old browsers */
+          background: -moz-linear-gradient(top, #e5c0c0 0%, #880000 100%); /* FF3.6+ */
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e5c0c0), color-stop(100%,#880000)); /* Chrome,Safari4+ */
+          background: -webkit-linear-gradient(top, #e5c0c0 0%,#880000 100%); /* Chrome10+,Safari5.1+ */
+          background: -o-linear-gradient(top, #e5c0c0 0%,#880000 100%); /* Opera 11.10+ */
+          background: -ms-linear-gradient(top, #e5c0c0 0%,#880000 100%); /* IE10+ */
+          background: linear-gradient(to bottom, #e5c0c0 0%,#880000 100%); /* W3C */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5c0c0', endColorstr='#880000',GradientType=0 ); /* IE6-9 */
+
+          &:hover {
+            color: #440000;
+            background: -moz-linear-gradient(top, #880000 0%, #e5c0c0 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#880000), color-stop(100%,#e5c0c0)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, #880000 0%,#e5c0c0 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, #880000 0%,#e5c0c0 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, #880000 0%,#e5c0c0 100%); /* IE10+ */
+            background: linear-gradient(to bottom, #880000 0%,#e5c0c0 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#880000', endColorstr='#e5c0c0',GradientType=0 ); /* IE6-9 */
+
+          }
+        }
+      }
     }
     &.noborder {
       border: 2px solid white;
@@ -117,10 +190,31 @@
 
 .infobox {
   .box;
+  a {
+    text-decoration: none;
+  }
+}
+
+.ui-widget-content {
+  border: 2px solid @color-border;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+  border: none;
+  background: none;
+  color: @color-menu-active;
 }
 
 .ui-menu {
-  margin: 8pt !important;
+  margin: 8pt;
   .ui-menu {
    margin-top: -3px;
    margin-left: 0;
@@ -129,7 +223,13 @@
   }
   z-index: 2;
   .ui-menu-item {
-    font-size: 8pt;
+    white-space: nowrap;
+    font-size: 12pt;
+    font-family: antiqua;
+    a.ui-state-focus,
+    a.ui-state-active {
+      margin: 0;
+    }
     a {
      padding: 0px: 4px;
     }
@@ -137,7 +237,9 @@
 }
 
 .tags {
-  clear: both;
+  a {
+    text-decoration: none;
+  }
 }
 
 .pagination {
@@ -149,13 +251,9 @@
 }
 
 .copyright {
+  .box;
   clear: both;
-  border: solid 1px #880000;
-  color: #880000;
   margin: 20pt;
-  a {
-    color: #880000;
-  }
 }
 
 .twitter-timeline {
