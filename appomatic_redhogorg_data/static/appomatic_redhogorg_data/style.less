@@ -9,13 +9,22 @@
 @color-gradient-top: #ffffff;
 @color-gradient-bottom: #885555;
 
+@FontAwesomePath: "../appomatic_websitebase/Font-Awesome";
+
 @font-face {
-    font-family: 'Octicons Regular';
-    src: url("https://a248.e.akamai.net/assets.github.com/fonts/octicons/octicons-regular-webfont.eot?bcbcd035");
-    src: url("https://a248.e.akamai.net/assets.github.com/fonts/octicons/octicons-regular-webfont.eot?bcbcd035#iefix") format("embedded-opentype"), url("https://a248.e.akamai.net/assets.github.com/fonts/octicons/octicons-regular-webfont.woff?fcb80cfe") format("woff"), url("https://a248.e.akamai.net/assets.github.com/fonts/octicons/octicons-regular-webfont.ttf?c6d8539d") format("truetype"), url("https://a248.e.akamai.net/assets.github.com/fonts/octicons/octicons-regular-webfont.svg?2fc2af83#newFontRegular") format("svg");
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'FontAwesome';
+  src: url('@{FontAwesomePath}/fontawesome-webfont.eot?v=3.0.1');
+  src: url('@{FontAwesomePath}/fontawesome-webfont.eot?#iefix&v=3.0.1') format('embedded-opentype'),
+    url('@{FontAwesomePath}/fontawesome-webfont.woff?v=3.0.1') format('woff'),
+    url('@{FontAwesomePath}/fontawesome-webfont.ttf?v=3.0.1') format('truetype');
+//    url('@{FontAwesomePath}/fontawesome-webfont.svg#fontawesomeregular?v=3.0.1') format('svg');
+
+//  src: url('@{FontAwesomePath}/FontAwesome.otf') format('opentype');
+
+  font-weight: normal;
+  font-style: normal;
 }
+
 
 hr {
   border: 1px solid #880000;
@@ -259,3 +268,58 @@ a {
 .twitter-timeline {
   width: auto;
 }
+
+.awesome {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  -webkit-font-smoothing: antialiased;
+  display: inline;
+  width: auto;
+  height: auto;
+  line-height: normal;
+  vertical-align: baseline;
+  background-image: none;
+  background-position: 0% 0%;
+  background-repeat: repeat;
+  margin-top: 0;
+}
+
+.stButton {
+  margin-left: 0 !important;
+  .stMainServices.st-facebook-counter,
+  .stMainServices.st-twitter-counter {
+    width: 55pt;
+    background: none !important;
+    color: #880000;
+    font-size: 12pt;
+    &:before {
+      .awesome;
+    }
+    &:after {
+      font-family: 'Times New Roman';
+      font-style: normal;
+      font-variant: normal;
+      font-weight: normal;
+    }
+  }
+  .stMainServices.st-facebook-counter {
+    &:before {
+      content: "\f082";
+    }
+    &:after {
+      content: "Share";
+    }
+  }
+
+  .stMainServices.st-twitter-counter {
+    &:before {
+      content: "\f081";
+    }
+    &:after {
+      content: "Tweet";
+    }
+  }
+}
+
