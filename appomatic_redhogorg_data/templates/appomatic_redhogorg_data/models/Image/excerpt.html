@@ -9,3 +9,9 @@
   </div>
   {{ block.super }}
 {% endblock %}
+
+
+{% block buttons %}
+  {{ block.super }}
+  <a href="{{ obj.get_absolute_url }}"><i class=" icon-folder-close-alt"></i> Info</a>
+{% endblock %}
