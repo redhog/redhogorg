@@ -33,23 +33,16 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
             if 'license' in data and 'license_url' in data and '://' in data['license_url']:
                 self.set_license(data['license'], data['license_url'])
             
-            projects = appomatic_redhogorg_data.models.Project.objects.filter(title = data['name'])
-            if projects:
-                project = projects[0]
-                project.content = data['short_description']
-                project.license = self.license
-                project.author = self.user
-                project.published = published
-            else:
-                project = appomatic_redhogorg_data.models.Project(
-                    source = self.source,
-                    author = self.user,
-                    license = self.license,
-                    url = "/Projects/" + data['name'],
-                    content = data['short_description'],
-                    title = data['name'],
-                    published = published)
-            project.save()
+            project = self.upsert(
+                appomatic_redhogorg_data.models.Project,
+                "title",
+                source = self.source,
+                author = self.user,
+                license = self.license,
+                url = "/Projects/" + data['name'],
+                content = data['short_description'],
+                title = data['name'],
+                published = published)
             project.tags.add(self.add_tag("Software"))
 
     def handle2(self, path, *args, **options):

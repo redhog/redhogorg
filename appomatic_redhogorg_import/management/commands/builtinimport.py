@@ -26,36 +26,40 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
                                       ("/badge/twitter", "Badge/Twitter", "Twitter badge", ()),
                                       ("/badge/linkedin", "Badge/LinkedIn", "LinkedIn badge", ("Personal",)),
                                       ):
-
-            template = appomatic_redhogorg_data.models.StaticTemplate(
+            template = self.upsert(
+                appomatic_redhogorg_data.models.StaticTemplate,
+                "url",
                 source = self.source,
                 author = self.user,
                 license = self.license,
                 url = url,
                 title = title,
                 published = None,
-                render_subtype = subtype
-                )
-            template.save()
+                render_subtype = subtype)
             for tag in tags:
                 template.tags.add(self.add_tag(tag))
 
         for (url, title, items) in (("/sidebar/left", "Left sidebar", ("/mainmenu", "/badge/facebook")),
                                     ("/sidebar/right", "Right sidebar", ("/badge/github", "/badge/twitter"))):
 
-            collection = appomatic_redhogorg_data.models.ListCollection(
+            collection = self.upsert(
+                appomatic_redhogorg_data.models.ListCollection,
+                "url",
                 source = self.source,
                 author = self.user,
                 license = self.license,
                 url = url,
                 title = title,
                 published = None)
-            collection.save()
+            
             for ordering, item in enumerate(items):
-                appomatic_redhogorg_data.models.ListCollectionMember(
+                self.upsert(
+                    appomatic_redhogorg_data.models.ListCollectionMember,
+                    "collection",
+                    "node",
                     collection = collection,
                     node = appomatic_redhogorg_data.models.Node.objects.get(url=item),
-                    ordering = ordering).save()
+                    ordering = ordering)
 
     def handle2(self, *args, **options):
         self.set_source("builtin")

@@ -27,18 +27,15 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
         self.set_source(filename)
         with open(filename) as f:
             for row in csvdictreader(csv.reader(f)):
+                row['source'] = self.source
+                row['author'] = self.user
+                row['license'] = self.license
+                row['content'] = row['body']
+                row['published'] = datetime.datetime.utcfromtimestamp(int(row['timestamp']))
                 row['url'] = "/" + row['url']
-                articles = appomatic_redhogorg_data.models.Article.objects.filter(url = row['url'])
-                if len(articles):
-                    article = articles[0]
-                else:
-                    article = appomatic_redhogorg_data.models.Article(
-                        source = self.source,
-                        author = self.user,
-                        license = self.license,
-                        url = row['url'],
-                        title = row['title'],
-                        content = row['body'],
-                        published = datetime.datetime.utcfromtimestamp(int(row['timestamp'])))
-                    article.save()
+
+                article = self.upsert(
+                    appomatic_redhogorg_data.models.Article,
+                    "url",
+                    **row)
                 article.tags.add(self.add_tag(row['category']))

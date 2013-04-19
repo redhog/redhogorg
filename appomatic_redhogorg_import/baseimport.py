@@ -12,6 +12,20 @@ import django.contrib.auth.models
 class ImportCommand(django.core.management.base.BaseCommand):
     TOOLNAME = 'import'
 
+    def upsert(self, Model, *keys, **args):
+        lookup = dict((key, args[key])
+                      for key in keys)
+        objs = Model.objects.filter(**lookup)
+        if len(objs):
+            obj = objs[0]
+        else:
+            print "CREATE", lookup
+            obj = appomatic_redhogorg_data.models.Obj()
+        for name, value in args.iteritems():
+            setattr(obj, name, value)
+        obj.save()
+        return obj
+
     def add_tag(self, path):
         tag = None
         for item in path.split("/"):

@@ -79,15 +79,10 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
             elif projecttype == 'font':
                 Project = appomatic_redhogorg_data.models.Font
 
-            projects = Project.objects.filter(url = info['url'])
-
-            if len(projects):
-                project = projects[0]
-                for key, value in info.iteritems():
-                    setattr(project, key, value)
-            else:
-                project = Project(**info)
-            project.save()
+            project = self.upsert(
+                Project,
+                "url",
+                **info)
             for tag in tags:
                 project.tags.add(self.add_tag(tag))
 

@@ -2,5 +2,6 @@
 
 {% block content %}
   {{ obj.description|default:"" }}
-  <a href="{{ obj.content.url }}"><img src="{{ obj.content.url }}"></a>
+  <a href="{{ obj.content.url }}"><img src="{{ obj.content.url }}" style="width:100%;"></a>
+  {{block.super}}
 {% endblock %}

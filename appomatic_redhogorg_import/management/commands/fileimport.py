@@ -83,7 +83,8 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
                 "author": self.user,
                 "license": self.license,
                 "url": localpath,
-                "title": title}
+                "title": title,
+                "published": None}
 
             if os.path.exists(infopath):
                 data = {}
@@ -92,16 +93,13 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
                     if key in data:
                         info[key] = data[key]
 
-            files = File.objects.filter(url = localpath)
-            if len(files):
-                file = files[0]
-                for key, value in info.iteritems():
-                    setattr(file, key, value)
-            else:
-                info["published"] = None
-                file = File(**info)
-                file.content.importfile(mediapath)
-                file.save()
+            file = self.upsert(
+                File,
+                "url",
+                **info)
+
+            file.content.importfile(mediapath)
+            file.save()
 
             tag = localpath.split('/')[1:-1]
             if tag:

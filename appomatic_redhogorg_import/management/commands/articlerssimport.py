@@ -26,23 +26,15 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
     def handle2(self, filename, *args, **options):
         self.set_source(filename)
         for entry in feedparser.parse(filename).entries:
-            url = '/blog/' + django.template.defaultfilters.slugify(entry.title)
-            articles = appomatic_redhogorg_data.models.Article.objects.filter(
-                url = url)
-            if len(articles) > 0: url = "%s-%s" % (url, len(articles))
-            try:
-                article = appomatic_redhogorg_data.models.Article(
-                    source = self.source,
-                    author = self.user,
-                    license = self.license,
-                    url = url,
-                    title = entry.title,
-                    content = entry.description,
-                    published = datetime.datetime.strptime(entry.published, "%a, %d %b %Y %H:%M:%S %Z"))
-                article.save()
-            except:
-                print url
-                print len(articles)
-                raise
+            article = self.upsert(
+                appomatic_redhogorg_data.models.Article,
+                "url",
+                url = '/blog/' + django.template.defaultfilters.slugify(entry.title),
+                source = self.source,
+                author = self.user,
+                license = self.license,
+                title = entry.title,
+                content = entry.description,
+                published = datetime.datetime.strptime(entry.published, "%a, %d %b %Y %H:%M:%S %Z"))
             for tag in entry.tags:
                 article.tags.add(self.add_tag(tag.term))
