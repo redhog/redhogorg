@@ -31,11 +31,19 @@ class Renderable(fcdjangoutils.modelhelpers.SubclasModelMixin):
         return {'obj': self.subclassobject}
 
     @fcdjangoutils.modelhelpers.subclassproxy
+    def handle_methods(self, request, style = 'page.html'):
+        method = 'handle_' + request.REQUEST.get('method', 'read')
+        if not hasattr(self, method):
+            return {}
+        return getattr(self, method)(request, style)
+
+    @fcdjangoutils.modelhelpers.subclassproxy
     def render(self, request, style = 'page.html', context_arg = {}):
         subtype = ''
         if hasattr(self, 'render_subtype'):
             subtype = "/" + self.render_subtype
         context = self.context(request, style)
+        context.update(self.handle_methods(request, style))
         context.update(context_arg)
         return django.template.loader.select_template(
             ["%s%s/%s" % (t.replace(".", "/"), subtype, style)
