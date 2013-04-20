@@ -30,11 +30,13 @@
       <hr />
     {% endblock %}
   </div>
-  <div class="infobox tags">
-    {% for tag in obj.tags.all %}
-      <a href="{{tag.get_absolute_url}}"><i class="icon-tag"></i> {{tag.name}}</a>
-    {% endfor %}
-  </div>
+  {% if obj.tags.all %}
+    <div class="infobox tags">
+      {% for tag in obj.tags.all %}
+        <a href="{{tag.get_absolute_url}}"><i class="icon-tag"></i> {{tag.name}}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
   {{block.super}}
 {% endblock %}
 
@@ -53,6 +55,9 @@
   {% if obj.tag %}
     {{ obj.tag.render_as.list|safe }}
   {% endif %}
+{% endblock %}
+
+{% block footer %}
   <div id="disqus_thread"></div>
   <script type="text/javascript">
       /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -67,9 +72,6 @@
   </script>
   <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-{% endblock %}
-
-{% block footer %}
   {% if obj.author or obj.license %}
     <div class="copyright">
       {% if obj.author %}
