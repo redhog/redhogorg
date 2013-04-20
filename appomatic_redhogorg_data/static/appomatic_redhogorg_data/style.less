@@ -25,6 +25,27 @@
   font-style: normal;
 }
 
+@font-face {
+  src: url('CurlyHogRunes-Medium.ttf') format('truetype');
+  font-family: 'CurlyHogRunes';
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  src: url('CurlyHogRunes-Bold.ttf') format('truetype');
+  font-family: 'CurlyHogRunes';
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  src: url('CurlyHogRunes-BodyMedium.ttf') format('truetype');
+  font-family: 'CurlyHogRunes-Body';
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 hr {
   border: 1px solid #880000;
@@ -81,12 +102,23 @@ a {
 
 .published { .subheading; }
 
+.content_title {
+  h1 {
+    font-family: CurlyHogRunes;
+    font-weight: normal;
+    font-size: 100pt;
+    margin: 0;
+    color: #880000;
+    text-transform: capitalize;
+  }
+}
+
 .content {
-  h1 { font-size: 1.5em; }
-  h2 { font-size: 1.4em; }
-  h3 { font-size: 1.3em; }
-  h4 { font-size: 1.2em; }
-  h5 { font-size: 1.1em; }
+  h1 { font-size: 1.5em; text-transform: capitalize; }
+  h2 { font-size: 1.4em; text-transform: capitalize; }
+  h3 { font-size: 1.3em; text-transform: capitalize; }
+  h4 { font-size: 1.2em; text-transform: capitalize; }
+  h5 { font-size: 1.1em; text-transform: capitalize; }
 }
 
 
