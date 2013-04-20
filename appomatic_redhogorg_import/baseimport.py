@@ -20,7 +20,7 @@ class ImportCommand(django.core.management.base.BaseCommand):
             obj = objs[0]
         else:
             print "CREATE", lookup
-            obj = appomatic_redhogorg_data.models.Obj()
+            obj = Model()
         for name, value in args.iteritems():
             setattr(obj, name, value)
         obj.save()
