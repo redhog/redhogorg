@@ -60,6 +60,10 @@ hr {
 
 a {
   color: @color-link;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .left {
@@ -160,7 +164,6 @@ h1, h2, h3, h4, h5 {
       overflow: visible;
     }
     float: left;
-    text-decoration: none;
     color: black;
     &:hover {
       .box-active;
@@ -196,7 +199,6 @@ h1, h2, h3, h4, h5 {
           padding: 4pt;
           display: block;
           float: right;
-          text-decoration: none;
           border-top: 1px solid @color-border;
           border-left: 1px solid @color-border;
 
@@ -275,9 +277,6 @@ h1, h2, h3, h4, h5 {
 
 .infobox {
   .box-simple;
-  a {
-    text-decoration: none;
-  }
 }
 
 .ui-widget-content {
@@ -334,22 +333,14 @@ h1, h2, h3, h4, h5 {
   }
 }
 
-.tags {
-  a {
-    text-decoration: none;
-  }
-}
-
 .pagination {
   padding: 8pt;
   clear: both;
-  a {
-    text-decoration: none;
-  }
 }
 
 .copyright {
-  .box-simple;
+  border-top: 3px double #880000;
+  padding: 8pt;
   clear: both;
   margin: 20pt;
 }
