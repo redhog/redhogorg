@@ -1,6 +1,6 @@
 @color-link: #880000;
 @color-border: #880000;
-@color-border-active: #000000;
+@color-border-active: #880000;
 
 @color-menu: #000000;
 @color-menu-active: #880000;
@@ -40,8 +40,15 @@
 }
 
 @font-face {
-  src: url('CurlyHogRunes-BodyMedium.ttf') format('truetype');
-  font-family: 'CurlyHogRunes-Body';
+  src: url('CurlyHogRunes-Body-Medium.ttf') format('truetype');
+  font-family: 'CurlyHogRunesBody';
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  src: url('URWChanceryL-MediItal.ttf') format('truetype');
+  font-family: 'URWChanceryL';
   font-weight: normal;
   font-style: normal;
 }
@@ -58,13 +65,13 @@ a {
 .left {
   position: absolute;
   left: 0;
-  width: 100pt;
+  width: 120pt;
   top: 0;
   bottom: 0;
 }
 .center {
   position: absolute;
-  left: 100pt;
+  left: 120pt;
   right: 200pt;
   top: 0;
   bottom: 0;
@@ -94,19 +101,37 @@ a {
   display: block;
   padding: 8pt;
   margin: 8pt;
-  border: 2pt solid @color-border;
+  border: 3px double @color-border;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   -khtml-border-radius: 4px;
 }
 
+.box-active {
+  .box;
+  border: 3px solid @color-border-active;
+}
+
+.box-simple {
+  .box;
+  border: 1px solid @color-border-active;
+}
+
 .published { .subheading; }
+
+h1, h2, h3, h4, h5 {
+  font-family: URWChanceryL;
+  font-weight: normal;
+  letter-spacing: 1pt;
+  margin-bottom: 0;
+}
 
 .content_title {
   h1 {
     font-family: CurlyHogRunes;
     font-weight: normal;
     font-size: 100pt;
+    line-height: 100pt;
     margin: 0;
     color: #880000;
     text-transform: capitalize;
@@ -119,6 +144,10 @@ a {
   h3 { font-size: 1.3em; text-transform: capitalize; }
   h4 { font-size: 1.2em; text-transform: capitalize; }
   h5 { font-size: 1.1em; text-transform: capitalize; }
+  .excerpts {
+    margin-left: -8pt;
+    margin-right: -8p
+  }
 }
 
 
@@ -134,10 +163,11 @@ a {
     text-decoration: none;
     color: black;
     &:hover {
-      border: 2pt solid @color-border-active;
+      .box-active;
     }
     .excerpt_title {
       h2 {
+        font-size: 20pt;
         margin: 0;
       }
     }
@@ -195,7 +225,7 @@ a {
       }
     }
     &.noborder {
-      border: 2px solid white;
+      border: 3px solid white;
       padding: 0;
     }
   }
@@ -204,7 +234,13 @@ a {
 .right, .left {
   .excerpts {
     .excerpt, a.excerpt {
+      .box-simple;
       width: auto;
+      &.noborder {
+        border: 3px solid white;
+        padding: 0;
+      }
+
     }
   }
 }
@@ -220,9 +256,17 @@ a {
 }
 
 .excerpts.vertical {
+  margin: 0;
   .excerpt, a.excerpt {
     float: none;
     width: auto;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1pt solid #880000;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    -khtml-border-radius: 0;
     .excerpt_content {
        height: auto;
     }
@@ -230,14 +274,22 @@ a {
 }
 
 .infobox {
-  .box;
+  .box-simple;
   a {
     text-decoration: none;
   }
 }
 
 .ui-widget-content {
-  border: 2px solid @color-border;
+  border: 1px solid @color-border;
+  &.menubar {
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+  }
 }
 
 .ui-state-active,
@@ -265,14 +317,19 @@ a {
   z-index: 2;
   .ui-menu-item {
     white-space: nowrap;
-    font-size: 12pt;
-    font-family: antiqua;
+    font-family: URWChanceryL;
+    letter-spacing: 1pt;
+    font-size: 20pt;
+    line-height: 18pt;
     a.ui-state-focus,
     a.ui-state-active {
       margin: 0;
     }
     a {
-     padding: 0px: 4px;
+     text-transform: capitalize;
+     line-height: inherit;
+     padding-left: 2pt !important;
+     padding-right: 2pt !important;
     }
   }
 }
@@ -292,7 +349,7 @@ a {
 }
 
 .copyright {
-  .box;
+  .box-simple;
   clear: both;
   margin: 20pt;
 }
@@ -354,4 +411,3 @@ a {
     }
   }
 }
-

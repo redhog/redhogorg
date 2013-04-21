@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1052.3622"
+   height="744.09448"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="threegil.svg">
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective2826"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2853"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3683"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       id="filter3697"
+       inkscape:label="Noisy blur"
+       inkscape:menu="Blurs"
+       inkscape:menu-tooltip="Small-scale roughening and blurring to edges and content"
+       x="-0.25"
+       width="1.5"
+       y="-0.25"
+       height="1.5"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur3699"
+         stdDeviation="5"
+         result="result1" />
+      <feTurbulence
+         id="feTurbulence3701"
+         numOctaves="1"
+         seed="0"
+         type="fractalNoise"
+         baseFrequency="0.1"
+         result="result2" />
+      <feDisplacementMap
+         in2="result2"
+         id="feDisplacementMap3703"
+         scale="5"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         result="result3"
+         in="result1" />
+      <feComposite
+         in2="result3"
+         id="feComposite3705"
+         operator="atop" />
+    </filter>
+    <inkscape:perspective
+       id="perspective3738"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       id="filter3755"
+       inkscape:label="Noisy blur"
+       inkscape:menu="Blurs"
+       inkscape:menu-tooltip="Small-scale roughening and blurring to edges and content"
+       x="-0.25"
+       width="1.5"
+       y="-0.25"
+       height="1.5"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur3757"
+         stdDeviation="5"
+         result="result1" />
+      <feTurbulence
+         id="feTurbulence3759"
+         numOctaves="1"
+         seed="0"
+         type="fractalNoise"
+         baseFrequency="0.1"
+         result="result2" />
+      <feDisplacementMap
+         id="feDisplacementMap3761"
+         in2="result2"
+         scale="5"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         result="result3"
+         in="result1" />
+      <feComposite
+         id="feComposite3763"
+         in2="result3"
+         operator="atop" />
+    </filter>
+    <inkscape:perspective
+       id="perspective3738-7"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3632"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3658"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       id="filter3675"
+       inkscape:label="Noisy blur"
+       inkscape:menu="Blurs"
+       inkscape:menu-tooltip="Small-scale roughening and blurring to edges and content"
+       x="-0.25"
+       width="1.5"
+       y="-0.25"
+       height="1.5"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur3677"
+         stdDeviation="5"
+         result="result1" />
+      <feTurbulence
+         id="feTurbulence3679"
+         numOctaves="1"
+         seed="0"
+         type="fractalNoise"
+         baseFrequency="0.1"
+         result="result2" />
+      <feDisplacementMap
+         id="feDisplacementMap3681"
+         in2="result2"
+         scale="5"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         result="result3"
+         in="result1" />
+      <feComposite
+         id="feComposite3683"
+         in2="result3"
+         operator="atop" />
+    </filter>
+    <inkscape:perspective
+       id="perspective3693"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3718"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3743"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       id="filter3780"
+       inkscape:label="Noisy blur"
+       inkscape:menu="Blurs"
+       inkscape:menu-tooltip="Small-scale roughening and blurring to edges and content"
+       x="-0.25"
+       width="1.5"
+       y="-0.25"
+       height="1.5"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur3782"
+         stdDeviation="5"
+         result="result1" />
+      <feTurbulence
+         id="feTurbulence3784"
+         numOctaves="1"
+         seed="0"
+         type="fractalNoise"
+         baseFrequency="0.1"
+         result="result2" />
+      <feDisplacementMap
+         id="feDisplacementMap3786"
+         in2="result2"
+         scale="5"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         result="result3"
+         in="result1" />
+      <feComposite
+         id="feComposite3788"
+         in2="result3"
+         operator="atop" />
+    </filter>
+    <filter
+       id="filter3790"
+       inkscape:label="Noisy blur"
+       inkscape:menu="Blurs"
+       inkscape:menu-tooltip="Small-scale roughening and blurring to edges and content"
+       x="-0.25"
+       width="1.5"
+       y="-0.25"
+       height="1.5"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur3792"
+         stdDeviation="5"
+         result="result1" />
+      <feTurbulence
+         id="feTurbulence3794"
+         numOctaves="1"
+         seed="0"
+         type="fractalNoise"
+         baseFrequency="0.1"
+         result="result2" />
+      <feDisplacementMap
+         id="feDisplacementMap3796"
+         in2="result2"
+         scale="5"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         result="result3"
+         in="result1" />
+      <feComposite
+         id="feComposite3798"
+         in2="result3"
+         operator="atop" />
+    </filter>
+    <inkscape:perspective
+       id="perspective3824"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       id="filter3853"
+       inkscape:label="Noisy blur"
+       inkscape:menu="Blurs"
+       inkscape:menu-tooltip="Small-scale roughening and blurring to edges and content"
+       x="-0.25"
+       width="1.5"
+       y="-0.25"
+       height="1.5"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur3855"
+         stdDeviation="5"
+         result="result1" />
+      <feTurbulence
+         id="feTurbulence3857"
+         numOctaves="1"
+         seed="0"
+         type="fractalNoise"
+         baseFrequency="0.1"
+         result="result2" />
+      <feDisplacementMap
+         id="feDisplacementMap3859"
+         in2="result2"
+         scale="5"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         result="result3"
+         in="result1" />
+      <feComposite
+         id="feComposite3861"
+         in2="result3"
+         operator="atop" />
+    </filter>
+    <filter
+       id="filter3863"
+       inkscape:label="Noisy blur"
+       inkscape:menu="Blurs"
+       inkscape:menu-tooltip="Small-scale roughening and blurring to edges and content"
+       x="-0.25"
+       width="1.5"
+       y="-0.25"
+       height="1.5"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur3865"
+         stdDeviation="5"
+         result="result1" />
+      <feTurbulence
+         id="feTurbulence3867"
+         numOctaves="1"
+         seed="0"
+         type="fractalNoise"
+         baseFrequency="0.1"
+         result="result2" />
+      <feDisplacementMap
+         id="feDisplacementMap3869"
+         in2="result2"
+         scale="5"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         result="result3"
+         in="result1" />
+      <feComposite
+         id="feComposite3871"
+         in2="result3"
+         operator="atop" />
+    </filter>
+    <filter
+       id="filter3873"
+       inkscape:label="Noisy blur"
+       inkscape:menu="Blurs"
+       inkscape:menu-tooltip="Small-scale roughening and blurring to edges and content"
+       x="-0.25"
+       width="1.5"
+       y="-0.25"
+       height="1.5"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur3875"
+         stdDeviation="5"
+         result="result1" />
+      <feTurbulence
+         id="feTurbulence3877"
+         numOctaves="1"
+         seed="0"
+         type="fractalNoise"
+         baseFrequency="0.1"
+         result="result2" />
+      <feDisplacementMap
+         id="feDisplacementMap3879"
+         in2="result2"
+         scale="5"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         result="result3"
+         in="result1" />
+      <feComposite
+         id="feComposite3881"
+         in2="result3"
+         operator="atop" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35355339"
+     inkscape:cx="235.9145"
+     inkscape:cy="291.6816"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="757"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     showguides="true"
+     objecttolerance="20"
+     inkscape:snap-grids="true"
+     inkscape:snap-to-guides="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3648"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Background"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:#800080;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2869"
+       width="1046.5181"
+       height="737.41138"
+       x="5.3123956"
+       y="3.9602182" />
+  </g>
+  <g
+     inkscape:label="Live, Be, Do Shadow"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-308.2677)"
+     style="display:inline">
+    <path
+       style="fill:#a02c2c;fill-opacity:1;stroke:#a02c2c;stroke-width:5.70434115;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter3697)"
+       d="m 513.01563,461.18061 c -48.14789,-0.0229 -110.84678,25.13696 -168.3125,78.71875 C 281.29269,599.02408 165.64955,659.20631 62.078126,667.68061 205.64955,665.60921 282.21449,616.6209 333.54688,580.89936 435.52361,509.93507 557.5638,546.0864 514.98438,646.68061 598.44109,591.2924 500.41532,495.87977 411.64063,522.02436 c 41.56,-34.07448 105.53826,-45.03086 146.75,-32.375 72.24524,22.18604 104.22046,69.44513 106.25,119.34375 2.50523,61.5942 -68.80515,106.56668 -157.15625,67.6875 101.59591,74.04698 180.67342,15.29468 182.21875,-68.0625 1.19485,-64.45179 -54.37617,-134.13681 -162.25,-146.625 -4.64736,-0.53801 -9.45668,-0.81013 -14.4375,-0.8125 z m 464.90625,163.1875 c -143.57143,2.0714 -224.79102,67.69426 -287.65625,119.25 -62.86523,51.55574 -110.65438,67.23616 -154.8125,66.4375 -71.52441,-1.29361 -101.16528,-35.99096 -103.125,-71.84375 -1.88312,-34.45128 27.56711,-70.06381 55.875,-78.5 -50.84301,-4.00617 -79.41238,38.80884 -77.9375,82.5 1.47487,43.69116 37.00527,88.4401 124.5,89.875 72.34696,1.18648 129.30276,-35.05636 171.5,-73.90625 41.65356,-38.34933 168.08482,-125.3382 271.65625,-133.8125 z"
+       id="path2816-4-0"
+       transform="matrix(1.0518305,0,0,1.0518305,-19.605487,-12.721649)" />
+    <text
+       xml:space="preserve"
+       style="font-size:72px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Medium"
+       x="153.54318"
+       y="538.02338"
+       id="text3773"
+       transform="translate(0,308.2677)"><tspan
+         sodipodi:role="line"
+         id="tspan3775"
+         x="153.54318"
+         y="538.02338" /></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3831"
+       style="font-size:72px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Medium"><flowRegion
+         id="flowRegion3833"><rect
+           id="rect3835"
+           width="132.85715"
+           height="80"
+           x="152.85715"
+           y="301.23734" /></flowRegion><flowPara
+         id="flowPara3837" /></flowRoot>  </g>
+  <g
+     style="display:inline"
+     transform="translate(0,-308.2677)"
+     id="g4096"
+     inkscape:groupmode="layer"
+     inkscape:label="Live, Be, Do Outline"
+     sodipodi:insensitive="true">
+    <path
+       id="path4102"
+       d="M 519.7206,473.27553 C 469.07718,473.25147 403.12858,499.71535 342.68438,556.07431 275.98735,618.2635 154.35036,681.565 45.410786,690.47853 196.42358,688.29977 276.95692,636.77237 330.9499,599.19936 c 107.26223,-74.6424 235.62783,-36.61733 190.84149,69.19073 87.78232,-58.25901 -15.32418,-158.61693 -108.70011,-131.11725 43.71408,-35.84058 111.00837,-47.36483 154.35613,-34.05301 75.98975,23.33595 109.62226,73.0445 111.75699,125.52939 2.63508,64.78666 -72.37135,112.09009 -165.30174,71.19578 106.86168,77.88487 190.03782,16.08741 191.66324,-71.59021 1.25678,-67.79236 -57.19451,-141.08919 -170.6595,-154.22465 -4.88823,-0.56589 -9.94682,-0.85212 -15.1858,-0.85461 z m 489.0026,171.64559 c -151.01283,2.17876 -236.44208,71.20289 -302.56564,125.43079 -66.12357,54.2279 -116.38965,70.72104 -162.83651,69.88098 -75.23156,-1.36065 -106.40873,-37.85638 -108.47002,-75.56744 -1.98072,-36.23691 28.99593,-73.69526 58.77103,-82.5687 -53.47823,-4.21381 -83.52837,40.82032 -81.97704,86.77602 1.55131,45.95569 38.92327,93.02399 130.9529,94.53327 76.09673,1.24797 136.00458,-36.87335 180.38893,-77.73685 43.81248,-40.337 176.79674,-131.83454 285.73635,-140.74807 z"
+       style="fill:#000000;fill-opacity:1;stroke:#a02c2c;stroke-width:3.15549159;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       transform="translate(0,308.2677)"
+       id="text4104"
+       y="538.02338"
+       x="153.54318"
+       style="font-size:72px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Medium"
+       xml:space="preserve"><tspan
+         y="538.02338"
+         x="153.54318"
+         id="tspan4106"
+         sodipodi:role="line" /></text>
+    <flowRoot
+       style="font-size:72px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Medium"
+       id="flowRoot4108"
+       xml:space="preserve"><flowRegion
+         id="flowRegion4110"><rect
+           y="301.23734"
+           x="152.85715"
+           height="80"
+           width="132.85715"
+           id="rect4112" /></flowRegion><flowPara
+         id="flowPara4114" /></flowRoot>  </g>
+  <text
+     xml:space="preserve"
+     style="font-size:32px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Chancery L;-inkscape-font-specification:URW Chancery L Bold Italic"
+     x="262.85715"
+     y="505.52304"
+     id="text3800"><tspan
+       sodipodi:role="line"
+       id="tspan3802"
+       x="262.85715"
+       y="505.52304" /></text>
+</svg>
