@@ -5,6 +5,7 @@
 {% block meta %}
   <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
   <script type="text/javascript">stLight.options({publisher: "ur-7a59dfef-4f25-8c03-42ae-73266f3a2cef", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+  <script type="text/javascript" src="https://blockchain.info//Resources/wallet/pay-now-button.js"></script>
   {{block.super}}
 {% endblock %}
 
@@ -16,6 +17,26 @@
   {% endif %}
   <div class="infobox">
     {% block infobox %}
+      <div>
+        <div class="blockchain-btn" data-address="1MNL7iGWLMPVuvNLSHWHCL6Lstx3pahzsj">
+            <div class="blockchain stage-begin">
+              ฿ Donate
+            </div>
+            <div class="blockchain stage-loading" style="text-align:center">
+              <img src="https://blockchain.info//Resources/loading-large.gif">
+            </div>
+            <div class="blockchain stage-ready" style="font-size: 8pt;">
+              Please send payment to bitcoin address <b>[[address]]</b>
+              <p class="qr-code"></p>
+            </div>
+            <div class="blockchain stage-paid">
+                Payment Received <b>[[value]] BTC</b>. Thank You.
+            </div>
+            <div class="blockchain stage-error">
+                <font color="red">[[error]]</font>
+            </div>
+        </div>
+      </div>
       <div>
         <a class="FlattrButton" href="{{SITE_URL}}{{obj.get_absolute_url}}" data-flattr-uid="redhog" data-flattr-tags="{% for tag in obj.tags.all %}{{tag.name}}{% endfor %}" title="{{obj.title}}" lang="en" data-flattr-category="{% block flatter_category %}text{% endblock %}" data-flattr-button="compact">
          {% block flatter_description %}{% endblock %}
