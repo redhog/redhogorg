@@ -29,39 +29,17 @@ class ImportCommand(django.core.management.base.BaseCommand):
     def add_tag(self, path):
         tag = None
         for item in path.split("/"):
-            tags = appomatic_redhogorg_data.models.Tag.objects.filter(name = item, parent = tag)
-            if len(tags):
-                tag = tags[0]
-            else:
-                tag = appomatic_redhogorg_data.models.Tag(name = item, parent = tag)
-                tag.save()
+            tag = self.upsert(appomatic_redhogorg_data.models.Tag, "name", "parent", name = item, parent = tag)
         return tag
 
     def set_source(self, argument):
-        sources = appomatic_redhogorg_data.models.Source.objects.filter(tool=self.TOOLNAME, argument = argument)
-        if len(sources):
-            self.source = sources[0]
-        else:
-            self.source = appomatic_redhogorg_data.models.Source(
-                tool=self.TOOLNAME,
-                argument = argument)
-            self.source.save()
+        self.source = self.upsert(appomatic_redhogorg_data.models.Source, "tool", "argument", tool=self.TOOLNAME, argument = argument)
 
     def set_license(self, name = "GPL", url = "http://www.gnu.org/copyleft/gpl.html"):
-        licenses = appomatic_redhogorg_data.models.License.objects.filter(name = name)
-        if len(licenses):
-            self.license = licenses[0]
-        else:
-            self.license = appomatic_redhogorg_data.models.License(name = name, url = url)
-            self.license.save()
+        self.license = self.upsert(appomatic_redhogorg_data.models.License, "name", name=name, url=url)
 
-    def set_user(self):
-        users = django.contrib.auth.models.User.objects.filter(username = "redhog")
-        if len(users):
-            self.user = users[0]
-        else:
-            self.user = django.contrib.auth.models.User(username = "redhog")
-            self.user.save()
+    def set_user(self, username = 'redhog'):
+        self.user = self.upsert(django.contrib.auth.models.User, "username", username = username)
 
     def handle(self, *args, **options):
         try:
