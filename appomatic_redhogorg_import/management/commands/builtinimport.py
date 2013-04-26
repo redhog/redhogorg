@@ -24,6 +24,7 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
                                       ("/badge/facebook", "Badge/FaceBook", "FaceBook badge", ()),
                                       ("/badge/github", "Badge/GitHub", "GitHub badge", ("Personal",)),
                                       ("/badge/twitter", "Badge/Twitter", "Twitter badge", ()),
+                                      ("/badge/twingly", "Badge/Twingly", "Twingly badge", ()),
                                       ("/badge/linkedin", "Badge/LinkedIn", "LinkedIn badge", ("Personal",)),
                                       ):
             template = self.upsert(
@@ -40,7 +41,7 @@ class Command(appomatic_redhogorg_import.baseimport.ImportCommand):
                 template.tags.add(self.add_tag(tag))
 
         for (url, title, items) in (("/sidebar/left", "Left sidebar", ("/mainmenu", "/badge/facebook")),
-                                    ("/sidebar/right", "Right sidebar", ("/badge/github", "/badge/twitter"))):
+                                    ("/sidebar/right", "Right sidebar", ("/badge/github", "/badge/twitter", "/badge/twingly"))):
 
             collection = self.upsert(
                 appomatic_redhogorg_data.models.ListCollection,

@@ -246,5 +246,6 @@ class StaticTemplate(Node):
             ('Badge/FaceBook', 'FaceBook badge'),
             ('Badge/GitHub', 'GitHub badge'),
             ('Badge/Twitter', 'Twitter badge'),
+            ('Badge/Twingly', 'Twingly badge'),
             ('Badge/LinkedIn', 'LinkedIn badge')
             ))
