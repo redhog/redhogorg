@@ -7,6 +7,16 @@
   <script src="{{STATIC_URL}}appomatic_redhogorg_data/LiveBeDo/script.js" type="text/javascript"></script>
 {% endblock %}
 
+
+{% block boxes %}
+  <div class="infobox">
+    {% block infobox %}
+      <div><a href="{% url 'appomatic_redhogorg_data.views.node' url='' %}?style=page.rss"><i class="icon-rss"></i> RSS feed</a></div>
+    {% endblock %}
+  </div>
+  {{block.super}}
+{% endblock %}
+
 {% block body %}
   <div class="intro">
     <img src="{{STATIC_URL}}appomatic_redhogorg_data/LiveBeDo/threegil.png" class="logo">

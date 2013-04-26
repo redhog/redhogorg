@@ -48,6 +48,9 @@
       <div>
         <span class='st_twitter_hcount' displayText='Tweet'></span>
       </div>
+      {% if obj.tag %}
+        <div><a href="{{obj.get_absolute_url}}?style=page.rss"><i class="icon-rss"></i> RSS feed</a></div>
+      {% endif %}
       <hr />
     {% endblock %}
   </div>

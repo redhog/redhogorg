@@ -74,7 +74,9 @@ class Renderable(fcdjangoutils.modelhelpers.SubclasModelMixin):
         obj = self
         class Res(object):
             def __getattribute__(self, style):
-                return obj.render(fcdjangoutils.middleware.get_request(), style + ".html")
+                style = style.replace("__", ".")
+                if "." not in style: style = style + ".html"
+                return obj.render(fcdjangoutils.middleware.get_request(), style)
         return Res()
 
     def get_admin_url(self):
