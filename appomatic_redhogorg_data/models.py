@@ -10,6 +10,20 @@ import fcdjangoutils.middleware
 import django.contrib.auth.models
 import django.core.urlresolvers
 
+
+class WeakForeignKey(django.db.models.ForeignKey):
+    """Defines a weak, or fake, foreign key based on an existing field.
+    You must set db_column (and probably want to set to_field too).
+    Usefull to construct joins on non-primary keys."""
+
+    requires_unique_target=False
+    db_constraint=False
+    null=True
+    blank=True
+    def db_type(self, connection):
+        return None
+
+
 def get_basetypes(t):
     basetypes = []
     def get_basetypes(t):
@@ -163,19 +177,14 @@ class Node(django.db.models.Model, Renderable):
     license = django.db.models.ForeignKey(License, null=True, blank=True)
     author = django.db.models.ForeignKey(django.contrib.auth.models.User, null=True, blank=True)
 
+    tag = WeakForeignKey(Tag, db_column="title", to_field="name", related_name="node")
+
     @fcdjangoutils.modelhelpers.subclassproxy
     def __unicode__(self):
         return self.title
 
     def get_absolute_url(self):
         return django.core.urlresolvers.reverse('appomatic_redhogorg_data.views.node', kwargs={'url': self.url[1:]})
-
-    @property
-    def tag(self):
-        res = Tag.objects.filter(name = self.title)
-        if not len(res):
-            return None
-        return res[0]
 
     def breadcrumb(self):
         if self.tag:
