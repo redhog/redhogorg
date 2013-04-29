@@ -9,7 +9,7 @@ from django.conf import settings
 import fcdjangoutils.middleware
 import django.contrib.auth.models
 import django.core.urlresolvers
-
+import django.db.models
 
 class WeakForeignKey(django.db.models.ForeignKey):
     """Defines a weak, or fake, foreign key based on an existing field.
@@ -104,6 +104,10 @@ class Tag(mptt.models.MPTTModel, Renderable):
     name = django.db.models.CharField(max_length=50)
     parent = mptt.models.TreeForeignKey('self', null=True, blank=True, related_name='children')
 
+    @property
+    def pure_children(self):
+        return self.children.annotate(node_nr=django.db.models.Count('node')).filter(node_nr=0)
+
     class Meta:
         unique_together = (("name", "parent"),)
         ordering = ('name', )        
@@ -132,7 +136,7 @@ class Tag(mptt.models.MPTTModel, Renderable):
     def menutree(cls):
         def menutree(parent = None):
             if parent:
-                children = parent.children.all()
+                children = parent.pure_children.all()
             else:
                 children = cls.objects.filter(parent=None)
             if len(children) == 0:
