@@ -2,27 +2,18 @@ import django.db.models
 import ckeditor.fields
 import mptt.models
 import fcdjangoutils.modelhelpers
+import fcdjangoutils.middleware
+import fcdjangoutils.fields
 import django.template
 import datetime
 import django.utils.http
 from django.conf import settings
-import fcdjangoutils.middleware
 import django.contrib.auth.models
 import django.core.urlresolvers
 import django.db.models
-
-class WeakForeignKey(django.db.models.ForeignKey):
-    """Defines a weak, or fake, foreign key based on an existing field.
-    You must set db_column (and probably want to set to_field too).
-    Usefull to construct joins on non-primary keys."""
-
-    requires_unique_target=False
-    db_constraint=False
-    null=True
-    blank=True
-    def db_type(self, connection):
-        return None
-
+import django.db.models.fields.related
+import django.utils.functional
+import django.db.models.query
 
 def get_basetypes(t):
     basetypes = []
@@ -181,7 +172,7 @@ class Node(django.db.models.Model, Renderable):
     license = django.db.models.ForeignKey(License, null=True, blank=True)
     author = django.db.models.ForeignKey(django.contrib.auth.models.User, null=True, blank=True)
 
-    tag = WeakForeignKey(Tag, db_column="title", to_field="name", related_name="node")
+    tag = fcdjangoutils.fields.WeakForeignKey(Tag, db_column="title", to_field="name", related_name="node")
 
     @fcdjangoutils.modelhelpers.subclassproxy
     def __unicode__(self):
@@ -192,7 +183,7 @@ class Node(django.db.models.Model, Renderable):
 
     def breadcrumb(self):
         if self.tag:
-            return self.tag.breadcrumb()
+            return self.tag.get().breadcrumb()
         tags = self.tags.all()
         if len(tags):
             return tags[0].breadcrumb(include_self=True)
@@ -235,6 +226,8 @@ class ListCollectionMember(django.db.models.Model):
 class Article(Node):
     summary = ckeditor.fields.RichTextField(blank=True, null=True)
     content = ckeditor.fields.RichTextField()
+    extra = ckeditor.fields.RichTextField(null=True, blank=True)
+    image = django.db.models.ForeignKey(Node, null=True, blank=True, related_name="image_for")
 
 class File(Node):
     content = django.db.models.FileField(upload_to='.')

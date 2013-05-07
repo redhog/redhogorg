@@ -76,8 +76,8 @@
 {% endblock %}
 
 {% block content %}
-  {% if obj.tag %}
-    {{ obj.tag.render_as.list|safe }}
+  {% if obj.tag.get %}
+    {{ obj.tag.get.render_as.list|safe }}
   {% endif %}
 {% endblock %}
 

@@ -1,5 +1,10 @@
 {% extends 'appomatic_redhogorg_data/models/Node/page.html' %}
 
+{% block infobox %}
+  {{ block.super }}
+  {{obj.extra|safe}}
+{% endblock %}
+
 {% block flatter_description %}
   {% if obj.summary %}
     <em>{{ obj.summary|striptags }}</em>
@@ -12,6 +17,7 @@
   {% if obj.summary %}
     <em>{{ obj.summary|safe }}</em>
   {% endif %}
+  {{obj.image.render_as.inline|safe}}
   {{ obj.content|safe }}
   {{ block.super }}
 {% endblock %}
