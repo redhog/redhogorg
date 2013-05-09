@@ -14,6 +14,7 @@ import django.db.models
 import django.db.models.fields.related
 import django.utils.functional
 import django.db.models.query
+from django.db.models import Q
 
 def get_basetypes(t):
     basetypes = []
@@ -92,7 +93,7 @@ class Renderable(fcdjangoutils.modelhelpers.SubclasModelMixin):
 
 
 class Tag(mptt.models.MPTTModel, Renderable):
-    name = django.db.models.CharField(max_length=50)
+    name = django.db.models.CharField(max_length=128)
     parent = mptt.models.TreeForeignKey('self', null=True, blank=True, related_name='children')
 
     @property
@@ -166,8 +167,8 @@ class License(django.db.models.Model):
 class Node(django.db.models.Model, Renderable):
     url = django.db.models.CharField(max_length=1024, unique=True)
     tags = django.db.models.ManyToManyField(Tag, null=True, blank=True, related_name='nodes')
-    title = django.db.models.CharField(max_length=50)
-    published = django.db.models.DateTimeField(default=datetime.datetime.now, null=True, blank=True)
+    title = django.db.models.CharField(max_length=128, db_index=True)
+    published = django.db.models.DateTimeField(default=datetime.datetime.now, null=True, blank=True, db_index=True)
     source = django.db.models.ForeignKey(Source, null=True, blank=True)
     license = django.db.models.ForeignKey(License, null=True, blank=True)
     author = django.db.models.ForeignKey(django.contrib.auth.models.User, null=True, blank=True)
@@ -200,6 +201,10 @@ class Node(django.db.models.Model, Renderable):
                 return Obj.objects.get(url = "/" + url.replace("__", "/"))
         return Res()
 
+    @classmethod
+    def list_context(cls, request, style = 'page.html'):
+        return {"objs": cls.objects.filter(~Q(published=None))}
+
 
 class Collection(Node):
     @fcdjangoutils.modelhelpers.subclassproxy
@@ -230,11 +235,11 @@ class Article(Node):
     image = django.db.models.ForeignKey(Node, null=True, blank=True, related_name="image_for")
 
 class File(Node):
-    content = django.db.models.FileField(upload_to='.')
+    content = django.db.models.FileField(max_length=2048, upload_to='.')
     description = ckeditor.fields.RichTextField(blank=True, null=True)
 
 class Image(Node):
-    content = django.db.models.ImageField(upload_to='.')
+    content = django.db.models.ImageField(max_length=2048, upload_to='.')
     description = ckeditor.fields.RichTextField(blank=True, null=True)
 
 class Project(Article):
