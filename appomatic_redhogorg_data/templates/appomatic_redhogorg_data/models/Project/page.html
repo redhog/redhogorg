@@ -5,7 +5,7 @@
 {% block infobox %}
   {{ block.super }}
   {% if obj.repository_name %}
-    <div><a href="http://localhost/viewgit/?a=summary&p={{obj.repository_name}}"><i class="icon-github-sign"></i> Local repo</a></div>
+    <div><a href="/viewgit/?a=summary&p={{obj.repository_name}}"><i class="icon-github-sign"></i> Local repo</a></div>
     <div><a href="http://github.com/{{obj.github_username}}/{{obj.repository_name}}"><i class="icon-github"></i> GitHub repo</a></div>
 
 
