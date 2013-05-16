@@ -173,7 +173,7 @@ class Node(django.db.models.Model, Renderable):
     license = django.db.models.ForeignKey(License, null=True, blank=True)
     author = django.db.models.ForeignKey(django.contrib.auth.models.User, null=True, blank=True)
 
-    tag = fcdjangoutils.fields.WeakForeignKey(Tag, db_column="title", to_field="name", related_name="node")
+    tag = fcdjangoutils.fields.WeakForeignKey("title", Tag, "name", related_name="node")
 
     @fcdjangoutils.modelhelpers.subclassproxy
     def __unicode__(self):
