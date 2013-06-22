@@ -1,15 +1,14 @@
-{% extends 'appomatic_redhogorg_data/models/Node/excerpt.html' %}
+{% extends 'appomatic_renderable/models/Node/excerpt.html' %}
 
 {% block content_link %}{{ obj.content.url }}{% endblock %}
 
 {% block content %}
+  <div class="subheading">Format: {{obj.content.typename}}</div>
   <div class="excerpt_content_body">
-    <img src="{{ obj.content.url }}">
     {{ obj.description|default:"" }}
   </div>
   {{ block.super }}
 {% endblock %}
-
 
 {% block buttons %}
   {{ block.super }}

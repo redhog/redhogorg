@@ -1,4 +1,4 @@
-{% extends 'appomatic_redhogorg_data/base.html' %}
+{% extends 'appomatic_renderable/base.html' %}
 {% load endless %}
 
 {% block meta %}
@@ -11,7 +11,7 @@
 {% block boxes %}
   <div class="infobox">
     {% block infobox %}
-      <div><a href="{% url 'appomatic_redhogorg_data.views.node' url='' %}?style=page.rss"><i class="icon-rss"></i> RSS feed</a></div>
+      <div><a href="{% url 'appomatic_renderable.views.node' url='' %}?style=page.rss"><i class="icon-rss"></i> RSS feed</a></div>
     {% endblock %}
   </div>
   {{block.super}}

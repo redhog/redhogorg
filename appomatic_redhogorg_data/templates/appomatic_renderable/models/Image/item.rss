@@ -1,4 +1,4 @@
-{% extends 'appomatic_redhogorg_data/models/Node/item.rss' %}
+{% extends 'appomatic_renderable/models/Node/item.rss' %}
 
 {% block content %}
   {{block.super}}
