@@ -4,7 +4,7 @@ import appomatic_renderable.__urls__
 urlpatterns = django.conf.urls.patterns('')
 
 appomatic_renderable.__urls__.urlpatterns = django.conf.urls.patterns('',
-    (r'^tag/(?P<name>.*)/?$', 'appomatic_renderable.views.tag'),
+    (r'^tag(?P<url>.*)/?$', 'appomatic_renderable.views.tag'),
     (r'^(?P<url>.*)/?$', 'appomatic_renderable.views.node'),
 )
 
