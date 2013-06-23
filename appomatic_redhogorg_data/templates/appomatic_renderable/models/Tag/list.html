@@ -1,17 +1,21 @@
 {% load endless %}
 {% block list %}
-  <p>
-    Sub-categories:
-    {% for tag in obj.pure_children %}
-      {{tag.render_as.link|safe}}
-    {% endfor %}
-  </p>
+  {% if obj.pure_children %}
+    <p>
+      Sub-categories:
+      {% for tag in obj.pure_children %}
+        {{tag.render_as.link|safe}}
+      {% endfor %}
+    </p>
+  {% endif %}
 
-  {% paginate 10 obj.nodes.all as paginated_nodes %}
-  <div class="excerpts">
-    {% for node in paginated_nodes %}
-      {{ node.render_as.excerpt|safe }}
-    {% endfor %}
-  </div>
-  <div class="pagination">{% show_pages %}</div>
+  {% if obj.nodes.all %}
+    {% paginate 10 obj.nodes.all as paginated_nodes %}
+    <div class="excerpts">
+      {% for node in paginated_nodes %}
+        {{ node.render_as.excerpt|safe }}
+      {% endfor %}
+    </div>
+    <div class="pagination">{% show_pages %}</div>
+  {% endif %}
 {% endblock %}
