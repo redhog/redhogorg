@@ -1,5 +1,12 @@
 {% load endless %}
 {% block list %}
+  <p>
+    Sub-categories:
+    {% for tag in obj.pure_children %}
+      {{tag.render_as.link|safe}}
+    {% endfor %}
+  </p>
+
   {% paginate 10 obj.nodes.all as paginated_nodes %}
   <div class="excerpts">
     {% for node in paginated_nodes %}
