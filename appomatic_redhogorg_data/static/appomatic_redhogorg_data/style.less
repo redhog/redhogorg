@@ -413,3 +413,17 @@ h1, h2, h3, h4, h5 {
 .blockchain.stage-begin {
   color: @color-link;
 }
+
+
+@media print {
+  .left,
+  .right,
+  .breadcrumb {
+    display: none;
+  }
+  .center {
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+}
