@@ -33,6 +33,13 @@
         {% endblock %}
       </div>
       <div class="center">
+        {% if messages %}
+          <div class="messages">
+            {% for message in messages %}
+              <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
         <div class="content_title">
           {% block content_title %}{% endblock %}
         </div>
